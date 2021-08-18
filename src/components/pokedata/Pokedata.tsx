@@ -15,7 +15,6 @@ export default function Pokedata(props: any) {
 				sprite: res.data.sprites.front_default,
 				index: props.index
 			})
-			console.log(res.data)
 		})
 	}, []);
 

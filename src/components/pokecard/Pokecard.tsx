@@ -8,16 +8,13 @@ export default function Pokecard(props: any) {
 	const [pokemon, setPokemon] = useState({name: "Generic Pokemon", sprite: "", index: 0});
 
 	useEffect(() => {
-		const index = props.index
-
-		axios.get(`https://pokeapi.co/api/v2/pokemon/${index}/`)
+		axios.get(props.url)
 		.then(res => {
 			setPokemon({
 				name: res.data.name,
 				sprite: res.data.sprites.front_default,
-				index: props.index
+				index: res.data.id
 			})
-			console.log(res.data)
 		})
 	}, []);
 
