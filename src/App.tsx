@@ -2,13 +2,13 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-// temporary for testing
 import Browser from './components/browser/Browser';
+import Navbar from './components/navbar/Navbar';
 
 function App() {
   return (
     <div className="App">
-      <p>pokestop</p>
+      <Navbar />
 
       <Browser />
     </div>
