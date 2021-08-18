@@ -20,7 +20,7 @@ export default function Pokecard(props: any) {
 
 	return (
 		<>
-		<p>{pokemon.name}</p>
+		<p className="text-xl">{pokemon.name}</p>
 		</>
 	)
 }
