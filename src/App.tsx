@@ -8,11 +8,9 @@ import Browser from './components/browser/Browser';
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <p>pokestop</p>
+      <p>pokestop</p>
 
-        <Browser />
-      </header>
+      <Browser />
     </div>
   );
 }

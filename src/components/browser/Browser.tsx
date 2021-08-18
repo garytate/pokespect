@@ -6,11 +6,15 @@ import Pokecard from "../pokecard/Pokecard";
 export default function Browser() {
 	const [page, setPage] = useState(1);
 
+	const cards = []
+
+	for (let i = 1; i <= 25; i++) {
+		cards.push(<Pokecard index={i} />)
+	}
+
 	return (
 		<>
-		<p>Browser</p>
-
-		<Pokecard index="3"/>
+		{cards}
 		</>
 	)
 }
