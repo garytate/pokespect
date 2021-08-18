@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import axios from "axios";
 
 export default function Pokecard(props: any) {
-	const [pokemon, setPokemon] = useState({name: "Generic Pokemon"});
+	const [pokemon, setPokemon] = useState({name: "Generic Pokemon", sprite: ""});
 
 	useEffect(() => {
 		const index = props.index
@@ -12,15 +12,17 @@ export default function Pokecard(props: any) {
 		axios.get(`https://pokeapi.co/api/v2/pokemon/${index}/`)
 		.then(res => {
 			setPokemon({
-				name: res.data.name
+				name: res.data.name,
+				sprite: res.data.sprites.front_default
 			})
 			console.log(res.data)
 		})
 	}, []);
 
 	return (
-		<>
-		<p className="text-xl">{pokemon.name}</p>
-		</>
+		<div className="text-xl px-8 m-2 bg-blue-200 flex-auto">
+			<img src={pokemon.sprite} />
+			<p>{pokemon.name}</p>
+		</div>
 	)
 }

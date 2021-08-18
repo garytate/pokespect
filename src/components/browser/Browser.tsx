@@ -8,13 +8,15 @@ export default function Browser() {
 
 	const cards = []
 
-	for (let i = 1; i <= 25; i++) {
+	for (let i = 1; i <= 24; i++) {
 		cards.push(<Pokecard index={i} />)
 	}
 
 	return (
 		<>
-		{cards}
+			<div className="grid grid-cols-4">
+				{cards}
+			</div>
 		</>
 	)
 }
