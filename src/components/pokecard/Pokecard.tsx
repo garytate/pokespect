@@ -21,7 +21,7 @@ export default function Pokecard(props: any) {
 
 	return (
 		<div className="text-xl px-8 m-2 bg-blue-200 flex-auto">
-			<img src={pokemon.sprite} />
+			<img className="mx-auto object-center" src={pokemon.sprite} />
 			<p>{pokemon.name}</p>
 		</div>
 	)
