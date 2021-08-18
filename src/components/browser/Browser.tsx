@@ -4,23 +4,11 @@ import axios from "axios";
 import Pokecard from "../pokecard/Pokecard";
 import Filters from "./filters/Filters";
 
-// We know for certain the first index of each
-// generation, making a simple look-up table
-const GenerationFirstPokemon = [
-	1,
-	152,
-	252,
-	387,
-	494,
-	650,
-	722,
-	810,
-]
+import { PokemonData, GenerationFirstPokemon } from "../../types";
 
-interface PokemonData {
-	name: "loading...",
-	url: ""
-}
+
+
+
 
 export default function Browser() {
 	const [page, setPage] = useState(1);

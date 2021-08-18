@@ -5,23 +5,22 @@ import { Link } from "react-router-dom";
 
 export default function Pokedata(props: any) {
 	const { index } = useParams<{index: string}>();
-	const [pokemon, setPokemon] = useState({name: "Generic Pokemon", sprite: "", index: 0});
+	const [overview, setOverview] = useState<any>({});
 
 	useEffect(() => {
 		axios.get(`https://pokeapi.co/api/v2/pokemon/${index}/`)
 		.then(res => {
-			setPokemon({
-				name: res.data.name,
-				sprite: res.data.sprites.front_default,
-				index: props.index
-			})
+			setOverview(res.data)
+
+			console.log("HI")
+			console.log(overview)
 		})
 	}, []);
 
 	return (
 		<>
 		<Link to="/"><p>home</p></Link>
-		<p>{pokemon.name}</p>
+		<p>{overview.name}</p>
 		</>
 	)
 }
