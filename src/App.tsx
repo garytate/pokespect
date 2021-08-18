@@ -18,14 +18,16 @@ function App() {
       <div className="App">
         <Navbar />
 
-        <Switch>
-          <Route exact path="/">
-            <Browser />
-          </Route>
-          <Route path="/pokemon/:index">
-            <Pokedata />
-          </Route>
-        </Switch>
+        <div className="container mx-auto">
+          <Switch>
+            <Route exact path="/">
+              <Browser />
+            </Route>
+            <Route path="/pokemon/:index">
+              <Pokedata />
+            </Route>
+          </Switch>
+        </div>
       </div>
     </Router>
   );

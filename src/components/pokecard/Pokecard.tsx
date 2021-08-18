@@ -19,9 +19,10 @@ export default function Pokecard(props: any) {
 	}, []);
 
 	return (
-		<div className="text-xl px-8 m-2 bg-blue-200 flex-auto">
+		<div className="p-8 m-2 bg-blue-200 flex-auto">
 			<img className="mx-auto object-center" src={pokemon.sprite} />
 			<Link to={`/pokemon/${pokemon.index}`}><p>{pokemon.name}</p></Link>
+			<p>#{pokemon.index}</p>
 		</div>
 	)
 }
