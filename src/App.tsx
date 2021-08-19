@@ -1,6 +1,9 @@
 import React from 'react';
 import './App.css';
 
+// Roboto font
+import '@fontsource/roboto';
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -11,12 +14,13 @@ import {
 import Browser from './components/browser/Browser';
 import Navbar from './components/navbar/Navbar';
 import Pokedata from './components/pokedata/Pokedata';
+import Header from './components/header/Header';
 
 function App() {
   return (
     <Router>
       <div className="App">
-        <Navbar />
+        <Header />
 
         <div className="container mx-auto">
           <Switch>
