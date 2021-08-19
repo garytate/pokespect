@@ -15,8 +15,9 @@ export default function Filters(props: any) {
 
 	}
 
+	// TODO make this auto-generate
 	return (
-		<div>
+		<div style={{padding: "20px"}}>
 			<Button size="small" variant="contained" color="primary" aria-controls="generations-menu" aria-haspopup="true" onClick={handleClick}>
 				{buttonText}
 			</Button>

@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { Card, CardContent, CardMedia, CircularProgress, makeStyles, Typography } from "@material-ui/core";
+import { Card, CardContent, CardMedia, CircularProgress, Grid, makeStyles, Typography } from "@material-ui/core";
 import TypeBadges from "../type-badges/TypeBadges";
+
+import { FavoriteBorder, Favorite } from '@material-ui/icons';
 
 const cardStyles = makeStyles((theme: any) => ({
 	container: {
@@ -12,7 +14,8 @@ const cardStyles = makeStyles((theme: any) => ({
 		width: "380px",
 		backgroundColor: "#283E58",
 		height: "150px",
-		borderRadius: 32
+		borderRadius: 32,
+		position: "relative"
 	},
 	sprite: {
 		width: "100%",
@@ -35,12 +38,25 @@ const cardStyles = makeStyles((theme: any) => ({
 		display: "flex",
 		margin: "0px",
 		padding: "0px"
+	},
+	topLine: {
+		display: "grid"
+	},
+	heart: {
+		position: "absolute",
+		top:10,
+		right:15,
+		color: "#FFF"
+	},
+	heartGrid: {
+		padding: "0px",
+		margin: "0px"
 	}
 }));
 
 export default function Pokecard(props: any) {
 	const styles = cardStyles();
-	const [pokemon, setPokemon] = useState({name: "Generic Pokemon", sprite: "", index: 0, types: ["fire"]});
+	const [pokemon, setPokemon] = useState({name: "Generic Pokemon", sprite: "", index: "0", types: ["fire"]});
 	const [fetching, setFetching] = useState(true);
 
 	useEffect(() => {
@@ -51,10 +67,13 @@ export default function Pokecard(props: any) {
 				types.push(type.type.name)
 			}
 
+			let name = res.data.name.charAt(0).toUpperCase() + res.data.name.slice(1);
+			let index = ('000' + res.data.id).substr(-3)
+
 			setPokemon({
-				name: res.data.name,
+				name: name,
 				sprite: res.data.sprites.other["official-artwork"].front_default,
-				index: res.data.id,
+				index: index,
 				types: types
 			})
 
@@ -64,6 +83,7 @@ export default function Pokecard(props: any) {
 
 	if (fetching) return (<CircularProgress />);
 
+	// TODO add functionality to the favourite button
 	return (
 		<Card className={styles.container} variant="outlined">
 			<Link className={styles.link} to={`/pokemon/${pokemon.index}`}>
@@ -76,9 +96,16 @@ export default function Pokecard(props: any) {
 			</Link>
 			<div >
 				<CardContent className={styles.info}>
-					<Typography className={styles.text} style={{color: "#BBC1CD"}} variant="h6">
-						#{pokemon.index}
-					</Typography>
+					<Grid container className={styles.heartGrid}>
+						<Grid item xs={10} className={styles.heartGrid}>
+							<Typography className={styles.text} style={{color: "#BBC1CD"}} variant="h6">
+								#{pokemon.index}
+							</Typography>
+						</Grid>
+						<Grid item xs={2}>
+							<FavoriteBorder className={styles.heart} fontSize="large" />
+						</Grid>
+					</Grid>
 					<Link style={{textDecoration: "none"}} to={`/pokemon/${pokemon.index}`}>
 						<Typography className={styles.text} variant="h4" align="right">
 							{pokemon.name}
@@ -88,7 +115,7 @@ export default function Pokecard(props: any) {
 					{
 						pokemon.types.map(type => {
 							return (
-								<TypeBadges key={type} label={type.toUpperCase()} />
+								<TypeBadges key={type} label={type.toUpperCase()} style={{margin: 0}} />
 							)
 						})
 					}

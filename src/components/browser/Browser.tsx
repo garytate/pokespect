@@ -10,16 +10,10 @@ import { Grid } from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
-		root: {
-			flexGrow: 1,
-			justifyContent: "center"
-		},
 		card: {
-			display: "flex",
-			padding: theme.spacing(2),
-			textAlign: 'center',
-			color: theme.palette.text.secondary,
-			alignItems: "center"
+			alignItems: "center",
+			justifyContent: "center",
+			display: "grid"
 		},
 	}),
 );
@@ -62,16 +56,18 @@ export default function Browser() {
 	// 	})
 	// }
 
+	if (fetching) return (<p>loading...</p>);
+
 	return (
 		<>
 			<Filters handleClick={handleGen}/>
 
-			<Grid container spacing={5}>
+			<Grid container spacing={2}>
 			{
 				fetching && <p>Loading...</p> || cards.map(card => {
 					return (
-						<Grid item xs={12} md={6} lg={4}>
-							<Pokecard key={card.name} url={card.url}/>
+						<Grid key={card.name} className={styles.card} item xs={12} md={6} lg={4}>
+							<Pokecard url={card.url}/>
 						</Grid>
 					)
 				})
