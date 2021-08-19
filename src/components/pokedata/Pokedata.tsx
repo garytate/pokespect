@@ -3,12 +3,26 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
+import PokeStats from "./stats/PokeStats";
+
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+
+
+const useStyles = makeStyles((theme: Theme) =>
+	createStyles({
+		image: {
+			"max-width": "100%"
+		}
+	}),
+);
 
 export default function Pokedata(props: any) {
 	const { index } = useParams<{index: string}>();
 	const [overview, setOverview] = useState<any>({});
 	const [fetching, setFetching] = useState(true);
-	const [types, setTypes] = useState<string[]>([])
+	const [types, setTypes] = useState<string[]>([]);
+
+	const styles = useStyles();
 
 	useEffect(() => {
 		axios.get(`https://pokeapi.co/api/v2/pokemon/${index}/`)
@@ -31,8 +45,6 @@ export default function Pokedata(props: any) {
 
 	if (fetching) return (<p>loading...</p>)
 
-	console.log(overview)
-
 	return (
 		<Grid container spacing={3}>
 			<Grid item xs={4}>
@@ -45,15 +57,18 @@ export default function Pokedata(props: any) {
 				<Typography variant="h5">Favourite</Typography>
 			</Grid>
 			<Grid item xs={4}>
-				<img src={overview.sprites.other["official-artwork"].front_default} />
+				<img className={styles.image} src={overview.sprites.other["official-artwork"].front_default} />
 			</Grid>
 			<Grid item xs={8}>
 			<Typography variant="h6">Types</Typography>
-				{types.map(type => {
-					return (
-						<Chip key={type} label={type} />
-					)
-				})}
+			{types.map(type => {
+				return (
+					<Chip key={type} label={type} />
+				)
+			})}
+
+			<Typography variant="h6">Stats</Typography>
+			<PokeStats stats={overview.stats} />
 			</Grid>
 		</Grid>
 	)
