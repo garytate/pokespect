@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { Card, CardContent, CardMedia, makeStyles, Typography } from "@material-ui/core";
+import { Card, CardContent, CardMedia, CircularProgress, makeStyles, Typography } from "@material-ui/core";
 
 const cardStyles = makeStyles((theme: any) => ({
 	container: {
@@ -39,7 +39,7 @@ export default function Pokecard(props: any) {
 		})
 	}, []);
 
-	if (fetching) return (<p>Loading...</p>);
+	if (fetching) return (<CircularProgress />);
 
 	return (
 		<Card className={styles.container} variant="outlined">

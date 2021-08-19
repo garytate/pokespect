@@ -29,7 +29,7 @@ export default function Browser() {
 	const [gen, setGen] = useState(0);
 	const [cards, setCards] = useState<PokemonData[]>([]);
 	const [fetching, setFetching] = useState(true);
-	const [loadMoreURL, setLoadMoreURL] = useState();
+	// const [loadMoreURL, setLoadMoreURL] = useState("");
 
 	const handleGen = (generation: number) => {
 		setGen(generation)
@@ -42,9 +42,25 @@ export default function Browser() {
 		.then(res => {
 			setCards(res.data.results);
 
-			setFetching(false)
+			setFetching(false);
 		})
 	}, [gen]);
+
+	// TODO add load more functionality
+	// const clickLoadMore = () => {
+	// 	if (!loadMoreURL) return;
+
+	// 	console.log(loadMoreURL)
+
+	// 	axios.get(loadMoreURL)
+	// 	.then(res => {
+	// 		setCards(oldCards => [...oldCards, res.data.results]);
+
+	// 		setLoadMoreURL(res.data.next);
+	// 	}).catch(() => {
+	// 		console.log("error?")
+	// 	})
+	// }
 
 	return (
 		<>

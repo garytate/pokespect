@@ -4,14 +4,21 @@ import React, { useState } from "react";
 export default function Filters(props: any) {
 	// these are referenced from material-ui docs
 	const [anchorEl, setAnchorEl] = useState(null);
+	const [buttonText, setButtonText] = useState("Generations");
+	// const [buttonVariant, setButtonVariant] = useState("contained");
 
 	const handleClick = (event: any) => setAnchorEl(event.currentTarget);
 	const handleClose = () => setAnchorEl(null);
 
+	// TODO add this functionality
+	const handleGenChange = (value: any) => {
+
+	}
+
 	return (
 		<div>
-			<Button variant="contained" color="primary" aria-controls="generations-menu" aria-haspopup="true" onClick={handleClick}>
-				GENERATIONS
+			<Button size="small" variant="contained" color="primary" aria-controls="generations-menu" aria-haspopup="true" onClick={handleClick}>
+				{buttonText}
 			</Button>
 			<Menu
 				id="generations-menu"
