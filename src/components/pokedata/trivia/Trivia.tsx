@@ -14,10 +14,12 @@ const rows = [
 const useStyles = makeStyles({
 	card: {
 		"background-color": "green",
+		height: "100%"
 	}
 });
 
 
+// TODO use color from pokemon-color fetch
 export default function Trivia(props: any) {
 	const [color, setColor] = useState();
 	const classes = useStyles();
