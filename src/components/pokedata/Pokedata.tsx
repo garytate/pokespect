@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import PokeStats from "./stats/PokeStats";
 
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import { PokemonOverview } from "../../types";
+import Trivia from "./trivia/Trivia";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -18,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function Pokedata(props: any) {
 	const { index } = useParams<{index: string}>();
-	const [overview, setOverview] = useState<any>({});
+	const [overview, setOverview] = useState<PokemonOverview>();
 	const [fetching, setFetching] = useState(true);
 	const [types, setTypes] = useState<string[]>([]);
 
@@ -27,12 +29,19 @@ export default function Pokedata(props: any) {
 	useEffect(() => {
 		axios.get(`https://pokeapi.co/api/v2/pokemon/${index}/`)
 		.then(res => {
-			setOverview(res.data)
+			setOverview({
+				name: res.data.name,
+				index: res.data.order,
+				types: res.data.types,
+				stats: res.data.stats,
+				icon: res.data.sprites.other["official-artwork"].front_default
+			})
 
-			// TODO rework method of gathering array data
+			console.log(overview)
+
+			// // TODO rework method of gathering array data
 			let types = res.data.types
 			let typesArray: string[] = []
-
 			for (const type of types) {
 				typesArray.push(type.type.name)
 			}
@@ -43,7 +52,7 @@ export default function Pokedata(props: any) {
 		})
 	}, []);
 
-	if (fetching) return (<p>loading...</p>)
+	if (fetching || !overview) return (<p>loading...</p>)
 
 	return (
 		<Grid container spacing={3}>
@@ -57,16 +66,17 @@ export default function Pokedata(props: any) {
 				<Typography variant="h5">Favourite</Typography>
 			</Grid>
 			<Grid item xs={4}>
-				<img className={styles.image} src={overview.sprites.other["official-artwork"].front_default} />
+				<img className={styles.image} src={overview.icon} />
+				{types.map(type => {
+					return (
+						<Chip style={{margin: 5, padding: 10}}key={type} label={type} />
+					)
+				})}
 			</Grid>
 			<Grid item xs={8}>
-			<Typography variant="h6">Types</Typography>
-			{types.map(type => {
-				return (
-					<Chip key={type} label={type} />
-				)
-			})}
-
+				<Trivia />
+			</Grid>
+			<Grid item xs={8}>
 			<Typography variant="h6">Stats</Typography>
 			<PokeStats stats={overview.stats} />
 			</Grid>

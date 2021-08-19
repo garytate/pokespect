@@ -4,7 +4,7 @@ import axios from "axios";
 import Pokecard from "../pokecard/Pokecard";
 import Filters from "./filters/Filters";
 
-import { PokemonData, GenerationFirstPokemon } from "../../types";
+import { PokecardData, GenerationFirstPokemon } from "../../types";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
 
@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function Browser() {
 	const [page, setPage] = useState(1);
 	const [gen, setGen] = useState(0);
-	const [cards, setCards] = useState<PokemonData[]>([]);
+	const [cards, setCards] = useState<PokecardData[]>([]);
 	const [fetching, setFetching] = useState(true);
 	// const [loadMoreURL, setLoadMoreURL] = useState("");
 

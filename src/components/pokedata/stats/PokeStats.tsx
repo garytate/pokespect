@@ -24,7 +24,7 @@ export default function PokeStats(props: any) {
 	if (loading) return (<p>loading</p>)
 
 	return (
-		<TableContainer component={Paper}>
+		<TableContainer>
 			<Table>
 				<TableBody>
 					{stats.map(row => {

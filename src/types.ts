@@ -12,7 +12,15 @@ export const GenerationFirstPokemon = [
 	809,
 ]
 
-export interface PokemonData {
+export interface PokecardData {
 	name: "loading...",
 	url: ""
+}
+
+export interface PokemonOverview {
+	name: "Generic Pokemon",
+	index: 0,
+	types: {},
+	stats: {},
+	icon: ""
 }
