@@ -31,6 +31,8 @@ export default function PokeStats(props: any) {
 
 	if (loading) return (<p>loading</p>)
 
+	// TODO add min/max values to the stats
+
 	return (
 		<TableContainer>
 			<Table>

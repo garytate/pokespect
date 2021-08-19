@@ -8,6 +8,7 @@ import PokeStats from "./stats/PokeStats";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { PokemonOverview } from "../../types";
 import Trivia from "./trivia/Trivia";
+import TypeBadges from "../type-badges/TypeBadges";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -69,7 +70,7 @@ export default function Pokedata(props: any) {
 				<img className={styles.image} src={overview.icon} />
 				{types.map(type => {
 					return (
-						<Chip style={{margin: 5, padding: 10}}key={type} label={type} />
+						<TypeBadges key={type} label={type} />
 					)
 				})}
 			</Grid>
