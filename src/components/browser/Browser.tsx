@@ -5,6 +5,24 @@ import Pokecard from "../pokecard/Pokecard";
 import Filters from "./filters/Filters";
 
 import { PokemonData, GenerationFirstPokemon } from "../../types";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import { Grid } from "@material-ui/core";
+
+const useStyles = makeStyles((theme: Theme) =>
+	createStyles({
+		root: {
+			flexGrow: 1,
+			justifyContent: "center"
+		},
+		card: {
+			display: "flex",
+			padding: theme.spacing(2),
+			textAlign: 'center',
+			color: theme.palette.text.secondary,
+			alignItems: "center"
+		},
+	}),
+);
 
 export default function Browser() {
 	const [page, setPage] = useState(1);
@@ -16,6 +34,8 @@ export default function Browser() {
 	const handleGen = (generation: number) => {
 		setGen(generation)
 	}
+
+	const styles = useStyles();
 
 	useEffect(() => {
 		axios.get(`https://pokeapi.co/api/v2/pokemon?limit=16&offset=${GenerationFirstPokemon[gen - 1]}`)
@@ -30,13 +50,22 @@ export default function Browser() {
 		<>
 			<Filters handleClick={handleGen}/>
 
-			<div className="grid grid-cols-4">
-				{
-					fetching && <p>Loading...</p> || cards.map(card => <Pokecard key={card.name} url={card.url}/>)
-				}
-			</div>
+			<Grid container spacing={5}>
+			{
+				fetching && <p>Loading...</p> || cards.map(card => {
+					return (
+						<Grid item xs={6} md={3}>
+							<Pokecard key={card.name} url={card.url}/>
+						</Grid>
+					)
+				})
+			}
+
+			</Grid>
 
 			<button>Load More...</button>
 		</>
 	)
 }
+
+//

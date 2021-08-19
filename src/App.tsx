@@ -3,6 +3,7 @@ import './App.css';
 
 // Roboto font
 import '@fontsource/roboto';
+import { Container } from '@material-ui/core';
 
 import {
   BrowserRouter as Router,
@@ -22,7 +23,7 @@ function App() {
       <div className="App">
         <Header />
 
-        <div className="container mx-auto">
+        <Container maxWidth="md">
           <Switch>
             <Route exact path="/">
               <Browser />
@@ -31,7 +32,7 @@ function App() {
               <Pokedata />
             </Route>
           </Switch>
-        </div>
+        </Container>
       </div>
     </Router>
   );

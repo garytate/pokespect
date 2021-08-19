@@ -20,15 +20,15 @@ export default function Filters(props: any) {
 				open={Boolean(anchorEl)}
 				onClose={handleClose}
 			>
-				<MenuItem onClick={handleClose}>No Filter</MenuItem>
-				<MenuItem onClick={handleClose}>Generation I</MenuItem>
-				<MenuItem onClick={handleClose}>Generation II</MenuItem>
-				<MenuItem onClick={handleClose}>Generation III</MenuItem>
-				<MenuItem onClick={handleClose}>Generation IV</MenuItem>
-				<MenuItem onClick={handleClose}>Generation V</MenuItem>
-				<MenuItem onClick={handleClose}>Generation VI</MenuItem>
-				<MenuItem onClick={handleClose}>Generation VII</MenuItem>
-				<MenuItem onClick={handleClose}>Generation VIII</MenuItem>
+				<MenuItem onClick={() => props.handleClick(0)}>No Filter</MenuItem>
+				<MenuItem onClick={() => props.handleClick(1)}>Generation I</MenuItem>
+				<MenuItem onClick={() => props.handleClick(2)}>Generation II</MenuItem>
+				<MenuItem onClick={() => props.handleClick(3)}>Generation III</MenuItem>
+				<MenuItem onClick={() => props.handleClick(4)}>Generation IV</MenuItem>
+				<MenuItem onClick={() => props.handleClick(5)}>Generation V</MenuItem>
+				<MenuItem onClick={() => props.handleClick(6)}>Generation VI</MenuItem>
+				<MenuItem onClick={() => props.handleClick(7)}>Generation VII</MenuItem>
+				<MenuItem onClick={() => props.handleClick(8)}>Generation VIII</MenuItem>
 			</Menu>
 		</div>
 	)
