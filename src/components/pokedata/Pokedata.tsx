@@ -35,10 +35,10 @@ export default function Pokedata(props: any) {
 				index: res.data.order,
 				types: res.data.types,
 				stats: res.data.stats,
-				icon: res.data.sprites.other["official-artwork"].front_default
+				icon: res.data.sprites.other["official-artwork"].front_default,
+				category: "",
+				abilities: res.data.abilities
 			})
-
-			console.log(overview)
 
 			// // TODO rework method of gathering array data
 			let types = res.data.types
@@ -47,7 +47,7 @@ export default function Pokedata(props: any) {
 				typesArray.push(type.type.name)
 			}
 
-			setTypes(typesArray)
+			setTypes(typesArray);
 
 			setFetching(false);
 		})
@@ -75,7 +75,7 @@ export default function Pokedata(props: any) {
 				})}
 			</Grid>
 			<Grid item xs={8}>
-				<Trivia />
+				<Trivia pokemon={overview} />
 			</Grid>
 			<Grid item xs={8}>
 			<Typography variant="h6">Stats</Typography>
@@ -106,18 +106,3 @@ types: [{…}]
 weight: 225
 
 */
-
-{/* <div className="table w-full">
-			<div className="table-row-group">
-				<div className="table-row">
-					<div className="table-cell">1</div>
-					<div className="table-cell">2</div>
-					<div className="table-cell">3</div>
-				</div>
-				<div className="table-row">
-					<div className="table-cell">2</div>
-					<div className="table-cell">3</div>
-					<div className="table-cell">4</div>
-				</div>
-			</div>
-		</div> */}

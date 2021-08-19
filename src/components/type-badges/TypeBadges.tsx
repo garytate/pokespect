@@ -17,6 +17,6 @@ export default function TypeBadges(props: any) {
 	}, [])
 
 	return (
-		<Chip style={{margin: 5, padding: 10, backgroundColor: color}} key={props.key} label={props.label} />
+		<Chip style={{margin: 5, padding: 10, backgroundColor: color}} label={props.label} />
 	)
 }

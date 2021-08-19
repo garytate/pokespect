@@ -16,7 +16,6 @@ export default function PokeStats(props: any) {
 		let tempStats = []
 
 		for (const stat of props.stats) {
-			console.log(props.stats)
 			tempStats.push({
 				base: stat.base_stat,
 				effort: stat.effort,

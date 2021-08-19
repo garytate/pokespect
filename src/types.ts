@@ -21,6 +21,8 @@ export interface PokemonOverview {
 	name: "Generic Pokemon",
 	index: 0,
 	types: {},
+	abilities: {},
 	stats: {},
-	icon: ""
+	icon: "",
+	category: ""
 }
