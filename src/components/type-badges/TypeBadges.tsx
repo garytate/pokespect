@@ -1,9 +1,26 @@
 import { Chip } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 
+// https://gist.github.com/apaleslimghost/0d25ec801ca4fc43317bcff298af43c3
 const TypeColors: { [key: string]: string } = {
-	FIRE: 'Crimson',
-	FLYING: 'DeepSkyBlue'
+	normal: '#A8A77A',
+	fire: '#EE8130',
+	water: '#6390F0',
+	electric: '#F7D02C',
+	grass: '#7AC74C',
+	ice: '#96D9D6',
+	fighting: '#C22E28',
+	poison: '#A33EA1',
+	ground: '#E2BF65',
+	flying: '#A98FF3',
+	psychic: '#F95587',
+	bug: '#A6B91A',
+	rock: '#B6A136',
+	ghost: '#735797',
+	dragon: '#6F35FC',
+	dark: '#705746',
+	steel: '#B7B7CE',
+	fairy: '#D685AD',
 }
 
 export default function TypeBadges(props: any) {
@@ -13,10 +30,10 @@ export default function TypeBadges(props: any) {
 		let colorName = props.label
 
 		if (colorName)
-			setColor(TypeColors[colorName.toUpperCase()]);
+			setColor(TypeColors[colorName.toLowerCase()] || '#777');
 	}, [])
 
 	return (
-		<Chip style={{margin: 5, padding: 10, backgroundColor: color}} label={props.label} />
+		<Chip style={{margin: 5, padding: 10, backgroundColor: color, borderRadius: 10, color: "white"}} label={props.label} />
 	)
 }

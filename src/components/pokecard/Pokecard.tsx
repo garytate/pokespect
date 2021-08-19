@@ -4,35 +4,58 @@ import PropTypes from 'prop-types';
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardMedia, CircularProgress, makeStyles, Typography } from "@material-ui/core";
+import TypeBadges from "../type-badges/TypeBadges";
 
 const cardStyles = makeStyles((theme: any) => ({
 	container: {
 		display: "flex",
-		width: 200
+		width: "380px",
+		backgroundColor: "#283E58",
+		height: "150px",
+		borderRadius: 32
 	},
 	sprite: {
-		width: 100
+		width: "100%",
+		height: "100%"
+	},
+	link: {
+		padding: "15px",
+		width: "30%",
+		height: "auto",
 	},
 	info: {
-		padding: 0
+		paddingLeft: "10px"
 	},
 	text: {
-		textAlign: "left"
+		textAlign: "left",
+		color: "#FAFAFF"
+	},
+	types: {
+		justifyContent: "left",
+		display: "flex",
+		margin: "0px",
+		padding: "0px"
 	}
 }));
 
 export default function Pokecard(props: any) {
 	const styles = cardStyles();
-	const [pokemon, setPokemon] = useState({name: "Generic Pokemon", sprite: "", index: 0});
+	const [pokemon, setPokemon] = useState({name: "Generic Pokemon", sprite: "", index: 0, types: ["fire"]});
 	const [fetching, setFetching] = useState(true);
 
 	useEffect(() => {
 		axios.get(props.url)
 		.then(res => {
+			let types: string[] = []
+			for (const type of res.data.types) {
+				types.push(type.type.name)
+			}
+
 			setPokemon({
 				name: res.data.name,
-				sprite: res.data.sprites.front_default,
-				index: res.data.id
+				sprite: res.data.sprites.other["official-artwork"].front_default,
+				index: res.data.id,
+				types: types
 			})
 
 			setFetching(false);
@@ -43,23 +66,38 @@ export default function Pokecard(props: any) {
 
 	return (
 		<Card className={styles.container} variant="outlined">
-			<CardMedia
-				component="img"
-				className={styles.sprite}
-				image={pokemon.sprite}
-				title={pokemon.name}
-			/>
+			<Link className={styles.link} to={`/pokemon/${pokemon.index}`}>
+				<CardMedia
+					component="img"
+					className={styles.sprite}
+					image={pokemon.sprite}
+					title={pokemon.name}
+				/>
+			</Link>
 			<div >
 				<CardContent className={styles.info}>
-					<Typography className={styles.text} variant="body1" align="right">
-						{pokemon.name}
-					</Typography>
-					<Typography variant="subtitle1">
+					<Typography className={styles.text} style={{color: "#BBC1CD"}} variant="h6">
 						#{pokemon.index}
 					</Typography>
-					<Link to={`/pokemon/${pokemon.index}`}><p>{pokemon.name}</p></Link>
+					<Link style={{textDecoration: "none"}} to={`/pokemon/${pokemon.index}`}>
+						<Typography className={styles.text} variant="h4" align="right">
+							{pokemon.name}
+						</Typography>
+					</Link>
+					<div className={styles.types}>
+					{
+						pokemon.types.map(type => {
+							return (
+								<TypeBadges key={type} label={type.toUpperCase()} />
+							)
+						})
+					}
+					</div>
+
 				</CardContent>
 			</div>
 		</Card>
 	)
 }
+
+//

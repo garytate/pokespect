@@ -70,7 +70,7 @@ export default function Browser() {
 			{
 				fetching && <p>Loading...</p> || cards.map(card => {
 					return (
-						<Grid item xs={6} md={3}>
+						<Grid item xs={12} md={6} lg={4}>
 							<Pokecard key={card.name} url={card.url}/>
 						</Grid>
 					)

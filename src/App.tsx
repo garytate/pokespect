@@ -23,7 +23,7 @@ function App() {
       <div className="App">
         <Header />
 
-        <Container maxWidth="md">
+        <Container maxWidth="lg">
           <Switch>
             <Route exact path="/">
               <Browser />
