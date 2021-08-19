@@ -57,6 +57,7 @@ export default function Pokecard(props: any) {
 					<Typography variant="subtitle1">
 						#{pokemon.index}
 					</Typography>
+					<Link to={`/pokemon/${pokemon.index}`}><p>{pokemon.name}</p></Link>
 				</CardContent>
 			</div>
 		</Card>

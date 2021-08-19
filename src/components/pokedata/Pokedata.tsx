@@ -1,3 +1,4 @@
+import { Chip, Grid, Typography } from "@material-ui/core";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
@@ -7,11 +8,22 @@ export default function Pokedata(props: any) {
 	const { index } = useParams<{index: string}>();
 	const [overview, setOverview] = useState<any>({});
 	const [fetching, setFetching] = useState(true);
+	const [types, setTypes] = useState<string[]>([])
 
 	useEffect(() => {
 		axios.get(`https://pokeapi.co/api/v2/pokemon/${index}/`)
 		.then(res => {
 			setOverview(res.data)
+
+			// TODO rework method of gathering array data
+			let types = res.data.types
+			let typesArray: string[] = []
+
+			for (const type of types) {
+				typesArray.push(type.type.name)
+			}
+
+			setTypes(typesArray)
 
 			setFetching(false);
 		})
@@ -19,36 +31,33 @@ export default function Pokedata(props: any) {
 
 	if (fetching) return (<p>loading...</p>)
 
-	return (
-		<>
-		<Link to="/"><p className="flex-initial">home</p></Link>
-		<div className="flex mt-12">
-			<div className="flex-auto">
-				<img className="mx-auto flex-initial" src={overview.sprites.front_default} />
-				</div>
-			<div className="flex-auto">
-				<p className="mx-auto flex-initial">{overview.name}</p>
-			</div>
-		</div>
+	console.log(overview)
 
-		<div className="table w-full">
-			<div className="table-row-group">
-				<div className="table-row">
-					<div className="table-cell">1</div>
-					<div className="table-cell">2</div>
-					<div className="table-cell">3</div>
-				</div>
-				<div className="table-row">
-					<div className="table-cell">2</div>
-					<div className="table-cell">3</div>
-					<div className="table-cell">4</div>
-				</div>
-			</div>
-		</div>
-		</>
+	return (
+		<Grid container spacing={3}>
+			<Grid item xs={4}>
+				<Link to="/"><p className="flex-initial">Browse</p></Link>
+			</Grid>
+			<Grid item xs={4}>
+				<Typography variant="h4">{overview.name}</Typography>
+			</Grid>
+			<Grid item xs={4}>
+				<Typography variant="h5">Favourite</Typography>
+			</Grid>
+			<Grid item xs={4}>
+				<img src={overview.sprites.other["official-artwork"].front_default} />
+			</Grid>
+			<Grid item xs={8}>
+			<Typography variant="h6">Types</Typography>
+				{types.map(type => {
+					return (
+						<Chip key={type} label={type} />
+					)
+				})}
+			</Grid>
+		</Grid>
 	)
 }
-
 /*
 0, …}
 abilities: (2) [{…}, {…}]
@@ -71,3 +80,18 @@ types: [{…}]
 weight: 225
 
 */
+
+{/* <div className="table w-full">
+			<div className="table-row-group">
+				<div className="table-row">
+					<div className="table-cell">1</div>
+					<div className="table-cell">2</div>
+					<div className="table-cell">3</div>
+				</div>
+				<div className="table-row">
+					<div className="table-cell">2</div>
+					<div className="table-cell">3</div>
+					<div className="table-cell">4</div>
+				</div>
+			</div>
+		</div> */}
