@@ -25,7 +25,7 @@ const useStyles = makeStyles({
 	}
   });
 
-  const columns = ["index", "height", "weight", "attack", "defense", "hp", "special-attack", "special-defense", "speed"]
+  const columns = ["name", "index", "height", "weight", "attack", "defense", "hp", "special-attack", "special-defense", "speed"]
 
 export default function Compare(props: any) {
 	const {index, compare} = useParams<{index: string, compare: string}>();

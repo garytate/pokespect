@@ -30,7 +30,9 @@ export default function CompareSearch(props: any) {
   const classes = useStyles();
 
   const handleOnChange = (event: object, value: any) => {
-	props.onSearch(value.id, props.position)
+	  if (!value) return;
+
+	  props.onSearch(value.id, props.position)
 	}
 
 	const pokemon = FindPokemonByID(parseInt(props.current.index))

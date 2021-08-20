@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { Card, CardContent, CardMedia, CircularProgress, Grid, makeStyles, Typography } from "@material-ui/core";
+import { Card, CardContent, CardMedia, CircularProgress, Grid, IconButton, makeStyles, Typography } from "@material-ui/core";
 import TypeBadges from "./TypeBadges";
 
 import { FavoriteBorder, Favorite } from '@material-ui/icons';
@@ -44,8 +44,8 @@ const cardStyles = makeStyles((theme: any) => ({
 	},
 	heart: {
 		position: "absolute",
-		top:10,
-		right:15,
+		top:5,
+		right:10,
 		color: "#FFF"
 	},
 	heartGrid: {
@@ -58,6 +58,21 @@ export default function Pokecard(props: any) {
 	const styles = cardStyles();
 	const [pokemon, setPokemon] = useState({name: "Generic Pokemon", sprite: "", index: 0, prettyIndex: "000", types: ["fire"]});
 	const [fetching, setFetching] = useState(true);
+	const [isFavourite, setIsFavourite] = useState(false);
+
+	const favouritePokemon = () => {
+		const favList = localStorage.getItem("favourites");
+		const favJSON = favList ? JSON.parse(favList) : {}
+
+		if (isFavourite) {
+			delete favJSON[pokemon.name];
+		} else {
+			favJSON[pokemon.name] = true;
+		}
+
+		localStorage.setItem("favourites", JSON.stringify(favJSON))
+		setIsFavourite(!isFavourite)
+	}
 
 	useEffect(() => {
 		axios.get(props.url)
@@ -79,6 +94,11 @@ export default function Pokecard(props: any) {
 			})
 
 			setFetching(false);
+
+			const favList = localStorage.getItem("favourites");
+			const favJSON = favList ? JSON.parse(favList) : []
+
+			setIsFavourite(favJSON.hasOwnProperty(pokemon.name))
 		})
 	}, []);
 
@@ -104,7 +124,12 @@ export default function Pokecard(props: any) {
 							</Typography>
 						</Grid>
 						<Grid item xs={2}>
-							<FavoriteBorder className={styles.heart} fontSize="large" />
+							<IconButton className={styles.heart} aria-label="heart" onClick={favouritePokemon}>
+								{isFavourite
+								? <Favorite fontSize="large" />
+								: <FavoriteBorder fontSize="large" />
+								}
+							</IconButton>
 						</Grid>
 					</Grid>
 					<Link style={{textDecoration: "none"}} to={`/pokemon/${pokemon.index}`}>
