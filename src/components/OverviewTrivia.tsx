@@ -23,7 +23,7 @@ const useStyles = makeStyles({
 });
 
 // TODO use color from pokemon-color fetch
-export default function Trivia(props: any) {
+export default function OverviewTrivia(props: any) {
 	const classes = useStyles();
 	const [rows, setRows] = useState<[[string, string]]>();
 

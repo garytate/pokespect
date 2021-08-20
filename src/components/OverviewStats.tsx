@@ -48,7 +48,7 @@ const LinearProgressWithLabel = (props: any & { value: number }) => {
 	);
 }
 
-export default function PokeStats(props: any) {
+export default function OverviewStats(props: any) {
 	const [stats, setStats] = useState<any[]>([{}])
 	const [loading, setLoading] = useState(true);
 	const classes = useStyles();

@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	}),
 );
 
-export default function Pokedata(props: any) {
+export default function Overview(props: any) {
 	const { index } = useParams<{index: string}>();
 	const [overview, setOverview] = useState<PokemonOverview>();
 	const [fetching, setFetching] = useState(true);
