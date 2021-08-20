@@ -2,7 +2,12 @@ import React from "react";
 import "./App.css";
 
 import "@fontsource/roboto";
-import { Container, createMuiTheme, createTheme, ThemeProvider } from "@material-ui/core";
+import {
+	Container,
+	createMuiTheme,
+	createTheme,
+	ThemeProvider,
+} from "@material-ui/core";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Browser from "./components/Browser";
@@ -13,18 +18,17 @@ import Favourites from "./components/Favourites";
 
 const theme = createTheme({
 	palette: {
-			primary: {
-				main: "#283E58",
-				light: "#00bcd4",
-				dark: "#006064"
-			},
-			secondary: {
-				main: "#ff4081",
-				light: "#ff80ab",
-				dark: "#f50057"
-			}
+		primary: {
+			main: "#283E58",
+			light: "#00bcd4",
+			dark: "#006064",
+		},
+		secondary: {
+			main: "#ff4081",
+			light: "#ff80ab",
+			dark: "#f50057",
+		},
 	},
-
 });
 
 function App() {
