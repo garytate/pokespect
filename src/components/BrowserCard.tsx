@@ -65,9 +65,9 @@ export default function Pokecard(props: any) {
 		const favJSON = favList ? JSON.parse(favList) : {}
 
 		if (isFavourite) {
-			delete favJSON[pokemon.name];
+			delete favJSON[pokemon.name.toLowerCase()];
 		} else {
-			favJSON[pokemon.name] = true;
+			favJSON[pokemon.name.toLowerCase()] = true;
 		}
 
 		localStorage.setItem("favourites", JSON.stringify(favJSON))
@@ -96,9 +96,9 @@ export default function Pokecard(props: any) {
 			setFetching(false);
 
 			const favList = localStorage.getItem("favourites");
-			const favJSON = favList ? JSON.parse(favList) : []
+			const favJSON = favList ? JSON.parse(favList) : {}
 
-			setIsFavourite(favJSON.hasOwnProperty(pokemon.name))
+			setIsFavourite(favJSON[res.data.name])
 		})
 	}, []);
 
