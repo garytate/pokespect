@@ -1,4 +1,4 @@
-import { useTheme, LinearProgress, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, CssBaseline, Box, Typography } from "@material-ui/core";
+import { useTheme, LinearProgress, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, CssBaseline, Box, Typography, Card, CardContent } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 
 const useStyles = makeStyles({
@@ -14,6 +14,10 @@ const useStyles = makeStyles({
 	table: {
 		backgroundColor: "#283D58",
 
+	},
+	card: {
+		height: "100%",
+		backgroundColor: "#283D58",
 	},
 	root: {
 		borderRadius: 8
@@ -63,21 +67,27 @@ export default function PokeStats(props: any) {
 	// TODO add min/max values to the stats
 
 	return (
-		<TableContainer className={classes.root}>
+		<Card className={classes.card}>
 			<CssBaseline />
 
-			<Table>
-				<TableBody className={classes.table}>
-					{stats.map(row => {
-						return (
-							<TableRow key={row.name}>
-							<TableCell className={classes.tableKey}>{row.name.toUpperCase()}</TableCell>
-							<TableCell className={classes.tableCell}><LinearProgressWithLabel value={50} /></TableCell>
-							</TableRow>
-						)
-					})}
-				</TableBody>
-			</Table>
-		</TableContainer>
+			<CardContent>
+				<Typography style={{color: "#FAFAFF", paddingBottom: 30}} variant="h5" align='left'>Pokemon Information</Typography>
+
+				<TableContainer className={classes.root}>
+					<Table>
+						<TableBody className={classes.table}>
+							{stats.map(row => {
+								return (
+									<TableRow key={row.name}>
+									<TableCell className={classes.tableKey}>{row.name.toUpperCase()}</TableCell>
+									<TableCell className={classes.tableCell}><LinearProgressWithLabel value={50} /></TableCell>
+									</TableRow>
+								)
+							})}
+						</TableBody>
+					</Table>
+				</TableContainer>
+			</CardContent>
+		</Card>
 	)
 }

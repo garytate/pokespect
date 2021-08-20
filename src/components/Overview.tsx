@@ -78,7 +78,6 @@ export default function Pokedata(props: any) {
 				<Trivia pokemon={overview} />
 			</Grid>
 			<Grid item xs={8}>
-			<Typography variant="h6">Stats</Typography>
 			<PokeStats stats={overview.stats} />
 			</Grid>
 		</Grid>
