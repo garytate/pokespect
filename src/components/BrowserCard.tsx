@@ -18,7 +18,7 @@ const cardStyles = makeStyles((theme: any) => ({
 	},
 	sprite: {
 		width: "100%",
-		height: "100%"
+		justifyContent: "center"
 	},
 	link: {
 		padding: "15px",
