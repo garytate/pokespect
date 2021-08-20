@@ -1,5 +1,6 @@
 import { Button, Card, CardContent, CssBaseline, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 // TODO use actual variable names
 function createData(name: string, value: string) {
@@ -35,8 +36,8 @@ export default function Trivia(props: any) {
 
 	useEffect(() => {
 		const tempRows: any = [];
-		tempRows.push(["Name", props.pokemon.name]);
-		tempRows.push(["Ability", props.pokemon.abilities[0].ability.name]);
+		tempRows.push(["Name", props.pokemon.name.toUpperCase()]);
+		tempRows.push(["Ability", props.pokemon.abilities[0].ability.name.toUpperCase()]);
 		tempRows.push(["Index", props.pokemon.index]);
 
 		setRows(tempRows)
@@ -49,7 +50,7 @@ export default function Trivia(props: any) {
 			<CssBaseline />
 
 			<CardContent>
-				<Typography style={{color: "#FAFAFF", paddingBottom: 30}} variant="h5" align='left'>Pokemon Information</Typography>
+				<Typography style={{color: "#FAFAFF", paddingBottom: 10}} variant="h5" align='left'>Pokemon Information</Typography>
 
 				<TableContainer>
 					<Table>
@@ -66,9 +67,11 @@ export default function Trivia(props: any) {
 					</Table>
 				</TableContainer>
 
-				<Button style={{margin: "20px 10px 0px 0px"}} variant="contained" color="primary">
-					Compare
-				</Button>
+				<Link to={`/pokemon/${props.pokemon.index}/compare/0`}>
+					<Button style={{margin: "20px 10px 0px 0px"}} variant="contained" color="primary">
+						Compare
+					</Button>
+				</Link>
 				<Button style={{margin: "20px 0px 0px 10px"}} variant="contained" color="primary">
 					FAVOURITE
 				</Button>

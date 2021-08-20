@@ -77,7 +77,10 @@ export default function Pokedata(props: any) {
 			<Grid item xs={8}>
 				<Trivia pokemon={overview} />
 			</Grid>
-			<Grid item xs={8}>
+			<Grid item xs={6}>
+			<PokeStats stats={overview.stats} />
+			</Grid>
+			<Grid item xs={6}>
 			<PokeStats stats={overview.stats} />
 			</Grid>
 		</Grid>

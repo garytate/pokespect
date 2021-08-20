@@ -51,7 +51,7 @@ export default function PokeStats(props: any) {
 			tempStats.push({
 				base: stat.base_stat,
 				effort: stat.effort,
-				name: stat.stat.name.replace("-", " ")
+				name: stat.stat.name.replace("special-", "SP ")
 			})
 		}
 
@@ -71,7 +71,7 @@ export default function PokeStats(props: any) {
 			<CssBaseline />
 
 			<CardContent>
-				<Typography style={{color: "#FAFAFF", paddingBottom: 30}} variant="h5" align='left'>Pokemon Information</Typography>
+				<Typography style={{color: "#FAFAFF", paddingBottom: 10}} variant="h5" align='left'>Pokemon Stats</Typography>
 
 				<TableContainer className={classes.root}>
 					<Table>

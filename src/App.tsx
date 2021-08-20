@@ -14,6 +14,7 @@ import {
 import Browser from './components/Browser';
 import Pokedata from './components/Overview';
 import Header from './components/AppHeader';
+import Compare from './components/Compare';
 
 const theme = createTheme({
   palette: {
@@ -37,6 +38,9 @@ function App() {
             <Switch>
               <Route exact path="/">
                 <Browser />
+              </Route>
+              <Route path="/pokemon/:index/compare/:compare">
+                <Compare />
               </Route>
               <Route path="/pokemon/:index">
                 <Pokedata />
