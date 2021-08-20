@@ -70,9 +70,6 @@ export default function Pokecard(props: any) {
 			let name = NameFormat(res.data.name);
 			let index = IndexFormat(res.data.id);
 
-			console.log("HI")
-			console.log(index)
-
 			setPokemon({
 				name: name,
 				sprite: res.data.sprites.other["official-artwork"].front_default,

@@ -6,7 +6,5 @@ export const NameFormat = (message: string) => {
 export const IndexFormat = (index: string) => {
 	const formatted = ('000' + index).substr(-3);
 
-	console.log(formatted)
-
 	return formatted;
 }

@@ -35,6 +35,10 @@ export default function Compare(props: any) {
 	const [rightPokemon, setRightPokemon] = useState<any>({});
 	const [loading, setLoading] = useState(0);
 
+	const onSearchUpdated = (index: string, position: number) => {
+		handleInfoFetch(index, position)
+	}
+
 	const handleInfoFetch = (index: string, position: number) => {
 		axios.get(`https://pokeapi.co/api/v2/pokemon/${index}/`)
 		.then(res => {
@@ -49,11 +53,9 @@ export default function Compare(props: any) {
 			for (const type in res.data.stats) {
 				dataTable[res.data.stats[type].stat.name] = res.data.stats[type].base_stat
 			}
-
-			console.log(dataTable)
-
 			setLoading(loading + 1);
 
+			// TODO change this
 			if (position === 1) {
 				setLeftPokemon(dataTable)
 			} else {
@@ -79,21 +81,23 @@ export default function Compare(props: any) {
 				<TableHead>
 					<TableRow>
 						<TableCell></TableCell>
-						<TableCell className={classes.header} align="center"><CompareSearch current={leftPokemon}/></TableCell>
-						<TableCell className={classes.header} align="center"><CompareSearch current={rightPokemon}/></TableCell>
+						<TableCell className={classes.header} align="center"><CompareSearch onSearch={onSearchUpdated} position={1} current={leftPokemon}/></TableCell>
+						<TableCell className={classes.header} align="center"><CompareSearch onSearch={onSearchUpdated} position={2} current={rightPokemon}/></TableCell>
 					</TableRow>
 				</TableHead>
+				<TableBody >
 				{
 					columns.map(column => {
 						return (
-							<TableBody key="column">
+							<TableRow key={column}>
 								<TableCell className={classes.cellKey}>{column.toUpperCase()}</TableCell>
 								<TableCell className={classes.cell}>{leftPokemon[column]}</TableCell>
-								<TableCell className={classes.cell}>{leftPokemon[column]}</TableCell>
-							</TableBody>
+								<TableCell className={classes.cell}>{rightPokemon[column]}</TableCell>
+							</TableRow>
 						)
 					})
 				}
+				</TableBody>
 			</Table>
 		</TableContainer>
 	</Container>

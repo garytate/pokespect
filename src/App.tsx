@@ -13,7 +13,7 @@ import {
 
 import Browser from './components/Browser';
 import Pokedata from './components/Overview';
-import Header from './components/AppHeader';
+import Header from './components/Header';
 import Compare from './components/Compare';
 
 const theme = createTheme({
