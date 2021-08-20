@@ -22,8 +22,14 @@ export default function Header() {
 				</Link>
 			</Grid>
 			<Grid item xs={12} sm={4}>
+			<Link to="/favourites">
 			<IconButton className={styles.icon} aria-label="heart" >
 				<Favorite />
+			</IconButton>
+			</Link>
+			<Link to="/pokemon/0/compare/0" >
+			<IconButton className={styles.icon} aria-label="compare" >
+				<CompareArrows />
 			</IconButton>
 			<IconButton
 			onClick={() => window.open("https://github.com/garytate/pokespect")}
@@ -31,10 +37,6 @@ export default function Header() {
 			aria-label="github"
 			>
 				<GitHub />
-			</IconButton>
-			<Link to="/pokemon/0/compare/0" >
-			<IconButton className={styles.icon} aria-label="compare" >
-				<CompareArrows />
 			</IconButton>
 			</Link>
 			</Grid>
