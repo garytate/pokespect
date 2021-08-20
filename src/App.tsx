@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 
 import "@fontsource/roboto";
-import { Container, createTheme, MuiThemeProvider } from "@material-ui/core";
+import { Container, createMuiTheme, createTheme, ThemeProvider } from "@material-ui/core";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Browser from "./components/Browser";
@@ -12,18 +12,23 @@ import Compare from "./components/Compare";
 
 const theme = createTheme({
 	palette: {
-		primary: {
-			main: "#FAFAFF",
-		},
-		secondary: {
-			main: "#283D58",
-		},
+			primary: {
+				main: "#283E58",
+				light: "#00bcd4",
+				dark: "#006064"
+			},
+			secondary: {
+				main: "#ff4081",
+				light: "#ff80ab",
+				dark: "#f50057"
+			}
 	},
+
 });
 
 function App() {
 	return (
-		<MuiThemeProvider theme={theme}>
+		<ThemeProvider theme={theme}>
 			<Router>
 				<div className="App">
 					<Header />
@@ -43,7 +48,7 @@ function App() {
 					</Container>
 				</div>
 			</Router>
-		</MuiThemeProvider>
+		</ThemeProvider>
 	);
 }
 

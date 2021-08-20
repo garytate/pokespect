@@ -1,21 +1,40 @@
 import React from "react";
-import { Grid, TextField } from "@material-ui/core";
-import SearchComplete from "./HeaderSearch";
+import { Grid, IconButton, makeStyles } from "@material-ui/core";
+import SearchComplete from "./BrowserSearch";
 import { Link } from "react-router-dom";
-// import Autocomplete from '@material-ui/lab/Autocomplete';
+import { CompareArrows, Favorite, GitHub } from "@material-ui/icons";
+
+const useStyles = makeStyles({
+	icon: {
+		color: "white"
+	}
+});
 
 // TODO do the responsiveness properly
 export default function Header() {
+	const styles = useStyles()
 
 	return (
-		<Grid container alignItems="center" justifyContent="center">
+		<Grid container style={{backgroundColor: "#283E58"}} alignItems="center" justifyContent="center">
 			<Grid item xs={12} sm={4}>
 				<Link style={{textDecoration: "none", color: "#FAFAFF"}} to="/" >
 					<h1>pokespect</h1>
 				</Link>
 			</Grid>
 			<Grid item xs={12} sm={4}>
-				<SearchComplete />
+			<IconButton className={styles.icon} aria-label="heart" >
+				<Favorite />
+			</IconButton>
+			<IconButton
+			onClick={() => window.open("https://github.com/garytate/pokespect")}
+			className={styles.icon}
+			aria-label="github"
+			>
+				<GitHub />
+			</IconButton>
+			<IconButton className={styles.icon} aria-label="compare" >
+				<CompareArrows />
+			</IconButton>
 			</Grid>
 		</Grid>
 	)

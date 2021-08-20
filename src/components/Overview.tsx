@@ -66,7 +66,7 @@ export default function Pokedata(props: any) {
 			<Grid item xs={4}>
 				<Typography variant="h5">Favourite</Typography>
 			</Grid>
-			<Grid item xs={4}>
+			<Grid item md={4} xs={12}>
 				<img alt={overview.name} className={styles.image} src={overview.icon} />
 				{types.map(type => {
 					return (
@@ -74,13 +74,13 @@ export default function Pokedata(props: any) {
 					)
 				})}
 			</Grid>
-			<Grid item xs={8}>
+			<Grid item md={8} xs={12}>
 				<Trivia pokemon={overview} />
 			</Grid>
-			<Grid item xs={6}>
+			<Grid item xs={12} md={6}>
 			<PokeStats stats={overview.stats} />
 			</Grid>
-			<Grid item xs={6}>
+			<Grid item xs={12} md={6}>
 			<PokeStats stats={overview.stats} />
 			</Grid>
 		</Grid>

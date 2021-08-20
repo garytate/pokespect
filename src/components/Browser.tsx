@@ -6,7 +6,9 @@ import Filters from "./BrowserFilters";
 
 import { PokecardData, GenerationFirstPokemon } from "../types";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import { Grid } from "@material-ui/core";
+import { Grid, IconButton } from "@material-ui/core";
+import { ExpandMore } from "@material-ui/icons";
+import BrowserSearch from "./BrowserSearch";
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -23,42 +25,39 @@ export default function Browser() {
 	const [cards, setCards] = useState<PokecardData[]>([]);
 	const [fetching, setFetching] = useState(true);
 
+	const [currentPage, setCurrentPage] = useState(1);
+	const [nextPage, setNextPage] = useState("");
+
+	const styles = useStyles();
+
 	const handleGen = (generation: number) => {
 		setGen(generation)
 	}
 
-	const styles = useStyles();
+	const handleLoadMore = () => {
+		axios.get(nextPage)
+		.then(res => {
+			setCards(cards.concat(res.data.results))
+			setNextPage(res.data.next)
+		})
+	}
 
 	useEffect(() => {
-		axios.get(`https://pokeapi.co/api/v2/pokemon?limit=16&offset=${GenerationFirstPokemon[gen - 1]}`)
+		axios.get(`https://pokeapi.co/api/v2/pokemon?limit=18&offset=${GenerationFirstPokemon[gen - 1]}`)
 		.then(res => {
 			setCards(res.data.results);
+			setNextPage(res.data.next);
 
 			setFetching(false);
 		})
 	}, [gen]);
 
-	// TODO add load more functionality
-	// const clickLoadMore = () => {
-	// 	if (!loadMoreURL) return;
-
-	// 	console.log(loadMoreURL)
-
-	// 	axios.get(loadMoreURL)
-	// 	.then(res => {
-	// 		setCards(oldCards => [...oldCards, res.data.results]);
-
-	// 		setLoadMoreURL(res.data.next);
-	// 	}).catch(() => {
-	// 		console.log("error?")
-	// 	})
-	// }
-
-	if (fetching) return (<p>loading...</p>);
-
 	return (
 		<>
-			<Filters handleClick={handleGen}/>
+			<Grid container spacing={2} alignItems="center" justifyContent="center">
+				<BrowserSearch item xs={6}/>
+				<Filters item xs={6} handleClick={handleGen} />
+			</Grid>
 
 			<Grid container spacing={2}>
 			{(fetching
@@ -73,9 +72,9 @@ export default function Browser() {
 
 			</Grid>
 
-			<button>Load More...</button>
+			<IconButton onClick={handleLoadMore} aria-label="load-more">
+				<ExpandMore fontSize="large" style={{color: "white"}} />
+			</IconButton>
 		</>
 	)
 }
-
-//

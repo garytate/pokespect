@@ -63,7 +63,7 @@ export default function Compare(props: any) {
 			}
 		})
 		.catch(err => {
-			console.log(err)
+			console.error(err)
 		})
 	}
 
