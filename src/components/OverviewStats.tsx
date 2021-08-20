@@ -4,20 +4,20 @@ import React, { useEffect, useState } from "react";
 const useStyles = makeStyles({
 	tableKey: {
 		width: "10%",
-		borderBottom: "none",
 		textAlign: "center",
-		color: "#FAFAFF"
+		color: "#283E58",
+		borderColor: "#778596"
 	},
 	tableCell: {
-		borderBottom: "none"
+		borderColor: "#778596"
 	},
 	table: {
-		backgroundColor: "#283D58",
-
+		backgroundColor: "#efeee9"
 	},
 	card: {
 		height: "100%",
-		backgroundColor: "#283D58",
+		color: "#283E58",
+		backgroundColor: "#efeee9"
 	},
 	root: {
 		borderRadius: 8
@@ -26,10 +26,10 @@ const useStyles = makeStyles({
 
 const BrightLinearProgress = withStyles({
 	barColorPrimary: {
-		backgroundColor: "#FAFAFF"
+		backgroundColor: "#283E58"
 	},
 	colorPrimary: {
-		backgroundColor: "#808080"
+		backgroundColor: "#efeee9"
 	}
 })(LinearProgress)
 
@@ -42,7 +42,7 @@ const LinearProgressWithLabel = (props: any & { value: number }) => {
 		  <BrightLinearProgress variant="determinate" {...props} />
 		</Box>
 		<Box minWidth={35}>
-		  <Typography variant="body2" style={{color: "#FAFAFF"}}>{`${Math.round(
+		  <Typography variant="body1" style={{color: "#283E58"}}>{`${Math.round(
 			props.value,
 		  )}`}</Typography>
 		</Box>
@@ -82,7 +82,7 @@ export default function PokeStats(props: any) {
 			<CssBaseline />
 
 			<CardContent>
-				<Typography style={{color: "#FAFAFF", paddingBottom: 10}} variant="h5" align='left'>Pokemon Stats</Typography>
+				<Typography style={{color: "#283E58", paddingBottom: 10}} variant="h4" align='left'>Pokemon Stats</Typography>
 
 				<TableContainer className={classes.root}>
 					<Table>

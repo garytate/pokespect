@@ -92,8 +92,6 @@ export default function Compare(props: any) {
 		handleInfoFetch(compare, 2)
 	}, []);
 
-	if (loading < 1) return (<p>Loading</p>);
-
 	return (
 	<Container maxWidth="sm">
 		<TableContainer>

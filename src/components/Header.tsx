@@ -32,9 +32,11 @@ export default function Header() {
 			>
 				<GitHub />
 			</IconButton>
+			<Link to="/pokemon/0/compare/0" >
 			<IconButton className={styles.icon} aria-label="compare" >
 				<CompareArrows />
 			</IconButton>
+			</Link>
 			</Grid>
 		</Grid>
 	)

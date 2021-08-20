@@ -9,12 +9,15 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { PokemonOverview } from "../types";
 import Trivia from "./OverviewTrivia";
 import TypeBadges from "./TypeBadges";
+import OverviewMoves from "./OverviewMoves";
+import { NameFormat } from "../utils/StringFormat";
 
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		image: {
-			"max-width": "100%"
+			"max-width": "100%",
+			alignContent: "center"
 		}
 	}),
 );
@@ -35,6 +38,7 @@ export default function Pokedata(props: any) {
 				index: res.data.id,
 				types: res.data.types,
 				stats: res.data.stats,
+				moves: res.data.moves,
 				icon: res.data.sprites.other["official-artwork"].front_default,
 				category: "",
 				abilities: res.data.abilities
@@ -61,7 +65,7 @@ export default function Pokedata(props: any) {
 				<Link to="/"><p className="flex-initial">Browse</p></Link>
 			</Grid>
 			<Grid item xs={4}>
-				<Typography variant="h4">{overview.name}</Typography>
+				<Typography variant="h4" style={{paddingTop: 20}}>{NameFormat(overview.name)}</Typography>
 			</Grid>
 			<Grid item xs={4}>
 				<Typography variant="h5">Favourite</Typography>
@@ -74,37 +78,15 @@ export default function Pokedata(props: any) {
 					)
 				})}
 			</Grid>
-			<Grid item md={8} xs={12}>
+			<Grid item xs={12} md={8}>
+			<PokeStats stats={overview.stats} />
+			</Grid>
+			<Grid item md={6} xs={12}>
 				<Trivia pokemon={overview} />
 			</Grid>
 			<Grid item xs={12} md={6}>
-			<PokeStats stats={overview.stats} />
-			</Grid>
-			<Grid item xs={12} md={6}>
-			<PokeStats stats={overview.stats} />
+			<OverviewMoves moves={overview.moves} />
 			</Grid>
 		</Grid>
 	)
 }
-/*
-0, …}
-abilities: (2) [{…}, {…}]
-base_experience: 142
-forms: [{…}]
-game_indices: (20) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
-height: 10
-held_items: []
-id: 8
-is_default: true
-location_area_encounters: "https://pokeapi.co/api/v2/pokemon/8/encounters"
-moves: (76) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
-name: "wartortle"
-order: 11
-past_types: []
-species: {name: "wartortle", url: "https://pokeapi.co/api/v2/pokemon-species/8/"}
-sprites: {back_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/8.png", back_female: null, back_shiny: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/8.png", back_shiny_female: null, front_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/8.png", …}
-stats: (6) [{…}, {…}, {…}, {…}, {…}, {…}]
-types: [{…}]
-weight: 225
-
-*/

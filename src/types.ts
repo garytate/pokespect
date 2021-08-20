@@ -12,6 +12,7 @@ export interface PokemonOverview {
 	index: 0;
 	types: {};
 	abilities: {};
+	moves: {};
 	stats: {};
 	icon: "";
 	category: "";

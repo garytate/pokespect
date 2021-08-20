@@ -10,22 +10,21 @@ function createData(name: string, value: string) {
 
 const useStyles = makeStyles({
 	card: {
-		height: "100%",
-		backgroundColor: "#283D58",
+		backgroundColor: "#efeee9",
 	},
 	tableKey: {
 		width: "20%",
-		borderBottom: "none",
 		textAlign: "center",
-		color: "#FAFAFF"
+		color: "#283E58",
+		borderColor: "#778596"
 	},
 	tableValue: {
-		borderBottom: "none",
+		borderColor: "#778596",
 		textAlign: "left",
-		color: "#FAFAFF"
+		color: "#283E58"
 	},
 	table: {
-		backgroundColor: "#283D58",
+		backgroundColor: "#efeee9",
 	}
 });
 
@@ -52,7 +51,7 @@ export default function Trivia(props: any) {
 			<CssBaseline />
 
 			<CardContent>
-				<Typography style={{color: "#FAFAFF", paddingBottom: 10}} variant="h5" align='left'>Pokemon Information</Typography>
+				<Typography style={{color: "#283E58", paddingBottom: 10}} variant="h4" align='left'>Pokemon Information</Typography>
 
 				<TableContainer>
 					<Table>
