@@ -73,7 +73,7 @@ export default function Browser() {
 			</Grid>
 
 			<IconButton onClick={handleLoadMore} aria-label="load-more">
-				<ExpandMore fontSize="large" style={{color: "white"}} />
+				<ExpandMore fontSize="large" style={{color: "#283E58"}} />
 			</IconButton>
 		</>
 	)

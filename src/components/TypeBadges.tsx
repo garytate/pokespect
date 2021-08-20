@@ -36,6 +36,6 @@ export default function TypeBadges(props: any) {
 	if (!color) return <p>loading...</p>
 
 	return (
-		<Chip style={{marginRight: 10, marginTop: 10, padding: 10, backgroundColor: color, borderRadius: 10, color: "white"}} label={props.label.toUpperCase()} />
+		<Chip {...props} style={{marginRight: 10, marginTop: 10, padding: 10, backgroundColor: color, borderRadius: 10, color: "white"}} label={props.label.toUpperCase()} />
 	)
 }

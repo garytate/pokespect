@@ -1,4 +1,4 @@
-import { useTheme, LinearProgress, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, CssBaseline, Box, Typography, Card, CardContent } from "@material-ui/core";
+import { useTheme, LinearProgress, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, CssBaseline, Box, Typography, Card, CardContent, withStyles } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 
 const useStyles = makeStyles({
@@ -24,14 +24,25 @@ const useStyles = makeStyles({
 	}
 });
 
+const BrightLinearProgress = withStyles({
+	barColorPrimary: {
+		backgroundColor: "#FAFAFF"
+	},
+	colorPrimary: {
+		backgroundColor: "#808080"
+	}
+})(LinearProgress)
+
 const LinearProgressWithLabel = (props: any & { value: number }) => {
+	const classes = useStyles();
+
 	return (
 	  <Box display="flex" alignItems="center">
 		<Box width="100%" mr={1}>
-		  <LinearProgress variant="determinate" {...props} />
+		  <BrightLinearProgress variant="determinate" {...props} />
 		</Box>
 		<Box minWidth={35}>
-		  <Typography variant="body2" color="primary">{`${Math.round(
+		  <Typography variant="body2" style={{color: "#FAFAFF"}}>{`${Math.round(
 			props.value,
 		  )}`}</Typography>
 		</Box>
@@ -80,7 +91,7 @@ export default function PokeStats(props: any) {
 								return (
 									<TableRow key={row.name}>
 									<TableCell className={classes.tableKey}>{row.name.toUpperCase()}</TableCell>
-									<TableCell className={classes.tableCell}><LinearProgressWithLabel value={50} /></TableCell>
+									<TableCell className={classes.tableCell}><LinearProgressWithLabel value={row.base} /></TableCell>
 									</TableRow>
 								)
 							})}
