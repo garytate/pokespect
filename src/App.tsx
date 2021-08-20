@@ -9,6 +9,7 @@ import Browser from "./components/Browser";
 import Pokedata from "./components/Overview";
 import Header from "./components/Header";
 import Compare from "./components/Compare";
+import Favourites from "./components/Favourites";
 
 const theme = createTheme({
 	palette: {
@@ -43,6 +44,9 @@ function App() {
 							</Route>
 							<Route path="/pokemon/:index">
 								<Pokedata />
+							</Route>
+							<Route path="/favourites">
+								<Favourites />
 							</Route>
 						</Switch>
 					</Container>

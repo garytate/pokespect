@@ -1,4 +1,4 @@
-import { Chip, Grid, Typography } from "@material-ui/core";
+import { Button, Chip, Grid, Typography } from "@material-ui/core";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
@@ -61,14 +61,18 @@ export default function Pokedata(props: any) {
 
 	return (
 		<Grid container spacing={3}>
-			<Grid item xs={4}>
-				<Link to="/"><p className="flex-initial">Browse</p></Link>
+			<Grid item xs={12} md={4}>
+				<Link to="/"><Typography variant="h6" style={{paddingTop: 20, textDecoration: "none"}}>Return to Pokedex</Typography></Link>
 			</Grid>
-			<Grid item xs={4}>
+			<Grid item xs={12} md={4}>
 				<Typography variant="h4" style={{paddingTop: 20}}>{NameFormat(overview.name)}</Typography>
 			</Grid>
-			<Grid item xs={4}>
-				<Typography variant="h5">Favourite</Typography>
+			<Grid item xs={12} md={4}>
+			<Link to={`/pokemon/${overview.index}/compare/0`}>
+					<Button style={{margin: "20px 10px 0px 0px", textDecoration: "none"}} variant="contained" color="primary">
+						Compare
+					</Button>
+				</Link>
 			</Grid>
 			<Grid item md={4} xs={12}>
 				<img alt={overview.name} className={styles.image} src={overview.icon} />

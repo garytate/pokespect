@@ -67,15 +67,6 @@ export default function Trivia(props: any) {
 						</TableBody>
 					</Table>
 				</TableContainer>
-
-				<Link to={`/pokemon/${props.pokemon.index}/compare/0`}>
-					<Button style={{margin: "20px 10px 0px 0px", textDecoration: "none"}} variant="contained" color="primary">
-						Compare
-					</Button>
-				</Link>
-				<Button style={{margin: "20px 0px 0px 10px", textDecoration: "none"}} variant="contained" color="primary">
-					FAVOURITE
-				</Button>
 			</CardContent>
 		</Card>
 	)
