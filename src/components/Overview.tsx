@@ -32,7 +32,7 @@ export default function Pokedata(props: any) {
 		.then(res => {
 			setOverview({
 				name: res.data.name,
-				index: res.data.order,
+				index: res.data.id,
 				types: res.data.types,
 				stats: res.data.stats,
 				icon: res.data.sprites.other["official-artwork"].front_default,

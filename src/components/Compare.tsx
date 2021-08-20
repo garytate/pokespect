@@ -2,7 +2,8 @@ import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody, makeS
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import NameFormat from "../utils/StringFormat";
+import { NameFormat, IndexFormat } from "../utils/StringFormat";
+import CompareSearch from "./CompareSearch";
 
 const useStyles = makeStyles({
 	table: {
@@ -10,74 +11,89 @@ const useStyles = makeStyles({
 	},
 	header: {
 		color: "#FAFAFF"
+	},
+	cell: {
+		color: "#FAFAFF",
+		textAlign: "center",
+		borderBottom: "none"
+	},
+	cellKey: {
+		width: "20%",
+		color: "#FAFAFF",
+		textAlign: "right",
+		borderBottom: "none"
 	}
   });
 
-export default function Compare(props: any) {
-	const [leftPokemon, setLeftPokemon] = useState<any>();
-	const [rightPokemon, setRightPokemon] = useState<any>();
-	const [lFetching, setLFetching] = useState(true);
-	const [rFetching, setRFetching] = useState(true);
-	const [error, setError] = useState<any>(null);
+  const columns = ["index", "height", "weight", "attack", "defense", "hp", "special-attack", "special-defense", "speed"]
 
+export default function Compare(props: any) {
+	const {index, compare} = useParams<{index: string, compare: string}>();
 	const classes = useStyles();
 
-	const {index, compare} = useParams<{index: string, compare: string}>();
+	const [leftPokemon, setLeftPokemon] = useState<any>({});
+	const [rightPokemon, setRightPokemon] = useState<any>({});
+	const [loading, setLoading] = useState(0);
 
-	useEffect(() => {
+	const handleInfoFetch = (index: string, position: number) => {
 		axios.get(`https://pokeapi.co/api/v2/pokemon/${index}/`)
 		.then(res => {
-			setLeftPokemon({
-				name: NameFormat(res.data.name),
-				index: res.data.order,
-				types: res.data.types,
-				stats: res.data.stats,
-				icon: res.data.sprites.other["official-artwork"].front_default,
-				category: "",
-				abilities: res.data.abilities
-			})
+			let dataTable: any = {}
 
-			setLFetching(false);
+			dataTable.name = NameFormat(res.data.name);
+			dataTable.index = IndexFormat(res.data.id);
+			dataTable.stats = res.data.stats;
+			dataTable.height = res.data.height + 'cm';
+			dataTable.weight = res.data.weight + 'kg';
+
+			for (const type in res.data.stats) {
+				dataTable[res.data.stats[type].stat.name] = res.data.stats[type].base_stat
+			}
+
+			console.log(dataTable)
+
+			setLoading(loading + 1);
+
+			if (position === 1) {
+				setLeftPokemon(dataTable)
+			} else {
+				setRightPokemon(dataTable)
+			}
 		})
 		.catch(err => {
-			setError(err.message)
+			console.log(err)
 		})
+	}
 
-		axios.get(`https://pokeapi.co/api/v2/pokemon/${compare}/`)
-		.then(res => {
-			setRightPokemon({
-				name: NameFormat(res.data.name),
-				index: res.data.order,
-				types: res.data.types,
-				stats: res.data.stats,
-				icon: res.data.sprites.other["official-artwork"].front_default,
-				category: "",
-				abilities: res.data.abilities
-			})
+	useEffect(() => {
+		handleInfoFetch(index, 1)
+		handleInfoFetch(compare, 2)
+	}, []);
 
-			setRFetching(false);
-		})
-		.catch(err => {
-			setError(err.message)
-		})
-	}, [])
-
-	if (error) return (<p>{error}</p>);
-	if (rFetching || lFetching) return (<p>Loading...</p>);
+	if (loading < 1) return (<p>Loading</p>);
 
 	return (
 	<Container maxWidth="sm">
 		<TableContainer>
 			<Table aria-label="simple table">
 				<TableHead>
-				<TableRow>
-					<TableCell className={classes.header} align="center">{leftPokemon.name}</TableCell>
-					<TableCell></TableCell>
-					<TableCell className={classes.header} align="center">{rightPokemon.name}</TableCell>
-				</TableRow>
+					<TableRow>
+						<TableCell></TableCell>
+						<TableCell className={classes.header} align="center"><CompareSearch current={leftPokemon}/></TableCell>
+						<TableCell className={classes.header} align="center"><CompareSearch current={rightPokemon}/></TableCell>
+					</TableRow>
 				</TableHead>
-				<TableBody>
-				</TableBody>
+				{
+					columns.map(column => {
+						return (
+							<TableBody key="column">
+								<TableCell className={classes.cellKey}>{column.toUpperCase()}</TableCell>
+								<TableCell className={classes.cell}>{leftPokemon[column]}</TableCell>
+								<TableCell className={classes.cell}>{leftPokemon[column]}</TableCell>
+							</TableBody>
+						)
+					})
+				}
 			</Table>
 		</TableContainer>
 	</Container>

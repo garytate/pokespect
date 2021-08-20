@@ -6,7 +6,7 @@ import { Card, CardContent, CardMedia, CircularProgress, Grid, makeStyles, Typog
 import TypeBadges from "./TypeBadges";
 
 import { FavoriteBorder, Favorite } from '@material-ui/icons';
-import NameFormat from "../utils/StringFormat";
+import { NameFormat, IndexFormat } from "../utils/StringFormat";
 
 const cardStyles = makeStyles((theme: any) => ({
 	container: {
@@ -68,7 +68,10 @@ export default function Pokecard(props: any) {
 			}
 
 			let name = NameFormat(res.data.name);
-			let index = ('000' + res.data.id).substr(-3)
+			let index = IndexFormat(res.data.id);
+
+			console.log("HI")
+			console.log(index)
 
 			setPokemon({
 				name: name,
@@ -100,7 +103,7 @@ export default function Pokecard(props: any) {
 					<Grid container className={styles.heartGrid}>
 						<Grid item xs={10} className={styles.heartGrid}>
 							<Typography className={styles.text} style={{color: "#BBC1CD"}} variant="h6">
-								#{pokemon.index}
+								#{pokemon.prettyIndex}
 							</Typography>
 						</Grid>
 						<Grid item xs={2}>

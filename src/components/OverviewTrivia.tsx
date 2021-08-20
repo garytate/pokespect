@@ -1,6 +1,7 @@
 import { Button, Card, CardContent, CssBaseline, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { IndexFormat } from "../utils/StringFormat";
 
 // TODO use actual variable names
 function createData(name: string, value: string) {
@@ -36,9 +37,10 @@ export default function Trivia(props: any) {
 
 	useEffect(() => {
 		const tempRows: any = [];
+
 		tempRows.push(["Name", props.pokemon.name.toUpperCase()]);
 		tempRows.push(["Ability", props.pokemon.abilities[0].ability.name.toUpperCase()]);
-		tempRows.push(["Index", props.pokemon.index]);
+		tempRows.push(["Index", "#" + IndexFormat(props.pokemon.index)]);
 
 		setRows(tempRows)
 	}, [])
