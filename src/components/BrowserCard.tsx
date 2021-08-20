@@ -6,6 +6,7 @@ import { Card, CardContent, CardMedia, CircularProgress, Grid, makeStyles, Typog
 import TypeBadges from "./TypeBadges";
 
 import { FavoriteBorder, Favorite } from '@material-ui/icons';
+import NameFormat from "../utils/StringFormat";
 
 const cardStyles = makeStyles((theme: any) => ({
 	container: {
@@ -66,7 +67,7 @@ export default function Pokecard(props: any) {
 				types.push(type.type.name)
 			}
 
-			let name = res.data.name.charAt(0).toUpperCase() + res.data.name.slice(1);
+			let name = NameFormat(res.data.name);
 			let index = ('000' + res.data.id).substr(-3)
 
 			setPokemon({

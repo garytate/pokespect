@@ -67,7 +67,7 @@ export default function Pokedata(props: any) {
 				<Typography variant="h5">Favourite</Typography>
 			</Grid>
 			<Grid item xs={4}>
-				<img className={styles.image} src={overview.icon} />
+				<img alt={overview.name} className={styles.image} src={overview.icon} />
 				{types.map(type => {
 					return (
 						<TypeBadges key={type} label={type} />
