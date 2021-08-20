@@ -3,12 +3,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
-import PokeStats from "./stats/PokeStats";
+import PokeStats from "./OverviewStats";
 
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import { PokemonOverview } from "../../types";
-import Trivia from "./trivia/Trivia";
-import TypeBadges from "../type-badges/TypeBadges";
+import { PokemonOverview } from "../types";
+import Trivia from "./OverviewTrivia";
+import TypeBadges from "./TypeBadges";
 
 
 const useStyles = makeStyles((theme: Theme) =>

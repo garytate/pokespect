@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 
 import axios from "axios";
-import Pokecard from "../pokecard/Pokecard";
-import Filters from "./filters/Filters";
+import Pokecard from "./BrowserCard";
+import Filters from "./BrowserFilters";
 
-import { PokecardData, GenerationFirstPokemon } from "../../types";
+import { PokecardData, GenerationFirstPokemon } from "../types";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
 
@@ -19,11 +19,9 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function Browser() {
-	const [page, setPage] = useState(1);
 	const [gen, setGen] = useState(0);
 	const [cards, setCards] = useState<PokecardData[]>([]);
 	const [fetching, setFetching] = useState(true);
-	// const [loadMoreURL, setLoadMoreURL] = useState("");
 
 	const handleGen = (generation: number) => {
 		setGen(generation)
@@ -63,15 +61,15 @@ export default function Browser() {
 			<Filters handleClick={handleGen}/>
 
 			<Grid container spacing={2}>
-			{
-				fetching && <p>Loading...</p> || cards.map(card => {
+			{(fetching
+					? <p>Loading...</p>
+					: cards.map(card => {
 					return (
 						<Grid key={card.name} className={styles.card} item xs={12} md={6} lg={4}>
 							<Pokecard url={card.url}/>
 						</Grid>
 					)
-				})
-			}
+			}))}
 
 			</Grid>
 

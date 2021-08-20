@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from 'prop-types';
 
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardMedia, CircularProgress, Grid, makeStyles, Typography } from "@material-ui/core";
-import TypeBadges from "../type-badges/TypeBadges";
+import TypeBadges from "./TypeBadges";
 
 import { FavoriteBorder, Favorite } from '@material-ui/icons';
 
@@ -56,7 +55,7 @@ const cardStyles = makeStyles((theme: any) => ({
 
 export default function Pokecard(props: any) {
 	const styles = cardStyles();
-	const [pokemon, setPokemon] = useState({name: "Generic Pokemon", sprite: "", index: "0", types: ["fire"]});
+	const [pokemon, setPokemon] = useState({name: "Generic Pokemon", sprite: "", index: 0, prettyIndex: "000", types: ["fire"]});
 	const [fetching, setFetching] = useState(true);
 
 	useEffect(() => {
@@ -73,7 +72,8 @@ export default function Pokecard(props: any) {
 			setPokemon({
 				name: name,
 				sprite: res.data.sprites.other["official-artwork"].front_default,
-				index: index,
+				prettyIndex: index,
+				index: res.data.id,
 				types: types
 			})
 

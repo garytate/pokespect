@@ -8,14 +8,12 @@ import { Container } from '@material-ui/core';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 
-import Browser from './components/browser/Browser';
-import Navbar from './components/navbar/Navbar';
-import Pokedata from './components/pokedata/Pokedata';
-import Header from './components/header/Header';
+import Browser from './components/Browser';
+import Pokedata from './components/Overview';
+import Header from './components/AppHeader';
 
 function App() {
   return (
