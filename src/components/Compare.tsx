@@ -90,6 +90,8 @@ export default function Compare(props: any) {
 	useEffect(() => {
 		handleInfoFetch(index, 1)
 		handleInfoFetch(compare, 2)
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return (

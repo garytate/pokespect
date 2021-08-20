@@ -100,6 +100,7 @@ export default function Pokecard(props: any) {
 
 			setIsFavourite(favJSON[res.data.name])
 		})
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	if (fetching) return (<CircularProgress />);

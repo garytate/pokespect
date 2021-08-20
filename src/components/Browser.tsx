@@ -4,11 +4,19 @@ import axios from "axios";
 import Pokecard from "./BrowserCard";
 import Filters from "./BrowserFilters";
 
-import { PokecardData, GenerationFirstPokemon } from "../types";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { Grid, IconButton } from "@material-ui/core";
 import { ExpandMore } from "@material-ui/icons";
 import BrowserSearch from "./BrowserSearch";
+
+// We know for certain the first index of each
+// generation, making a simple look-up table
+const GenerationFirstPokemon = [0, 151, 251, 386, 493, 649, 721, 809];
+
+interface PokecardData {
+	name: "loading...";
+	url: "";
+}
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -25,7 +33,6 @@ export default function Browser() {
 	const [cards, setCards] = useState<PokecardData[]>([]);
 	const [fetching, setFetching] = useState(true);
 
-	const [currentPage, setCurrentPage] = useState(1);
 	const [nextPage, setNextPage] = useState("");
 
 	const styles = useStyles();

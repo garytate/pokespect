@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from "react";
 
-import axios from "axios";
 import Pokecard from "./BrowserCard";
-import Filters from "./BrowserFilters";
 
-import { PokecardData, GenerationFirstPokemon } from "../types";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import { Grid, IconButton } from "@material-ui/core";
-import { ExpandMore } from "@material-ui/icons";
-import BrowserSearch from "./BrowserSearch";
+import { Grid } from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({

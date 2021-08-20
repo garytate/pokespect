@@ -1,11 +1,11 @@
 /* eslint-disable no-use-before-define */
-import React, { useState } from "react";
+import React from "react";
 import {
 	TextField,
 } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
 import { POKEMON_LIST } from "../data";
-import { Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 export default function BrowserSearch(props: any) {
 	const history = useHistory();

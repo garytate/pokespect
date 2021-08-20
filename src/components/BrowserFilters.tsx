@@ -1,5 +1,5 @@
-import { Button, FormControl, InputLabel, Menu, MenuItem, Select } from "@material-ui/core";
-import React, { useState } from "react";
+import { FormControl, InputLabel, Select } from "@material-ui/core";
+import React from "react";
 
 export default function Filters(props: any) {
 	const handleGenChange = (event: any) => {

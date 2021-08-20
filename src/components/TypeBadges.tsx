@@ -31,9 +31,11 @@ export default function TypeBadges(props: any) {
 
 		if (colorName)
 			setColor(TypeColors[colorName.toLowerCase()] || '#777');
-	}, [])
 
-	if (!color) return <p>loading...</p>
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
+	if (!color) return <p>loading...</p>;
 
 	return (
 		<Chip {...props} style={{marginRight: 10, marginTop: 10, padding: 10, backgroundColor: color, borderRadius: 10, color: "white"}} label={props.label.toUpperCase()} />

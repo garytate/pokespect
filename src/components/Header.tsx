@@ -1,6 +1,5 @@
 import React from "react";
 import { Grid, IconButton, makeStyles } from "@material-ui/core";
-import SearchComplete from "./BrowserSearch";
 import { Link } from "react-router-dom";
 import { CompareArrows, Favorite, GitHub } from "@material-ui/icons";
 

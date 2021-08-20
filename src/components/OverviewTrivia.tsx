@@ -1,12 +1,6 @@
-import { Button, Card, CardContent, CssBaseline, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from "@material-ui/core";
+import { Card, CardContent, CssBaseline, makeStyles, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { IndexFormat } from "../utils/StringFormat";
-
-// TODO use actual variable names
-function createData(name: string, value: string) {
-	return {name, value}
-}
 
 const useStyles = makeStyles({
 	card: {
@@ -30,7 +24,6 @@ const useStyles = makeStyles({
 
 // TODO use color from pokemon-color fetch
 export default function Trivia(props: any) {
-	const [color, setColor] = useState();
 	const classes = useStyles();
 	const [rows, setRows] = useState<[[string, string]]>();
 
@@ -42,9 +35,11 @@ export default function Trivia(props: any) {
 		tempRows.push(["Index", "#" + IndexFormat(props.pokemon.index)]);
 
 		setRows(tempRows)
-	}, [])
 
-	if (!rows) return (<p>loading...</p>)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
+	if (!rows) return (<p>loading...</p>);
 
 	return (
 		<Card className={classes.card}>

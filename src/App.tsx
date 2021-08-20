@@ -4,7 +4,6 @@ import "./App.css";
 import "@fontsource/roboto";
 import {
 	Container,
-	createMuiTheme,
 	createTheme,
 	ThemeProvider,
 } from "@material-ui/core";

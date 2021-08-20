@@ -1,4 +1,4 @@
-import { Button, Chip, Grid, Typography } from "@material-ui/core";
+import { Button, Grid, Typography } from "@material-ui/core";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
@@ -6,12 +6,21 @@ import { Link } from "react-router-dom";
 import PokeStats from "./OverviewStats";
 
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import { PokemonOverview } from "../types";
 import Trivia from "./OverviewTrivia";
 import TypeBadges from "./TypeBadges";
 import OverviewMoves from "./OverviewMoves";
 import { NameFormat } from "../utils/StringFormat";
 
+interface PokemonOverview {
+	name: "Generic Pokemon";
+	index: 0;
+	types: {};
+	abilities: {};
+	moves: {};
+	stats: {};
+	icon: "";
+	category: "";
+}
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -55,6 +64,8 @@ export default function Pokedata(props: any) {
 
 			setFetching(false);
 		})
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	if (fetching || !overview) return (<p>loading...</p>)

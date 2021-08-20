@@ -1,4 +1,4 @@
-import { useTheme, LinearProgress, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, CssBaseline, Box, Typography, Card, CardContent, withStyles } from "@material-ui/core";
+import { makeStyles, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, CssBaseline, Typography, Card, CardContent } from "@material-ui/core";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { NameFormat } from "../utils/StringFormat";
@@ -53,6 +53,8 @@ function OverviewMovesRow(props: any) {
 				setMove(tempMove);
 				setLoading(false);
 				 });
+
+			// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	if (loading) return <p>Loading</p>
@@ -82,6 +84,8 @@ export default function OverviewMoves(props: any) {
 
 		setMoveRows(tempRows);
 		setLoading(false);
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	if (loading) return (<p>loading</p>)

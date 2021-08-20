@@ -1,4 +1,4 @@
-import { useTheme, LinearProgress, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, CssBaseline, Box, Typography, Card, CardContent, withStyles } from "@material-ui/core";
+import { LinearProgress, makeStyles, Table, TableBody, TableCell, TableContainer, TableRow, CssBaseline, Box, Typography, Card, CardContent, withStyles } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 
 const useStyles = makeStyles({
@@ -34,8 +34,6 @@ const BrightLinearProgress = withStyles({
 })(LinearProgress)
 
 const LinearProgressWithLabel = (props: any & { value: number }) => {
-	const classes = useStyles();
-
 	return (
 	  <Box display="flex" alignItems="center">
 		<Box width="100%" mr={1}>
@@ -48,7 +46,7 @@ const LinearProgressWithLabel = (props: any & { value: number }) => {
 		</Box>
 	  </Box>
 	);
-  }
+}
 
 export default function PokeStats(props: any) {
 	const [stats, setStats] = useState<any[]>([{}])
@@ -69,11 +67,11 @@ export default function PokeStats(props: any) {
 		setStats(tempStats);
 
 		setLoading(false);
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	if (loading) return (<p>loading</p>)
-
-	// <LinearProgress color="primary" value={1} variant="determinate"/>
 
 	// TODO add min/max values to the stats
 
