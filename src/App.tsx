@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 
 import "@fontsource/roboto";
@@ -7,7 +7,7 @@ import {
 	createTheme,
 	ThemeProvider,
 } from "@material-ui/core";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { HashRouter as Router, Switch, Route } from "react-router-dom";
 
 import Browser from "./components/Browser";
 import Pokedata from "./components/Overview";
@@ -31,6 +31,9 @@ const theme = createTheme({
 });
 
 function App() {
+	useEffect(() => {
+		document.title = "pokespect"
+ }, []);
 	return (
 		<ThemeProvider theme={theme}>
 			<Router>

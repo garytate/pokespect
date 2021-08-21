@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Pokecard from "./BrowserCard";
 
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import { Grid } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -38,20 +38,18 @@ export default function Favourites() {
 		setFetching(false)
 	}, []);
 
-	console.log(cards)
-
 	return (
 		<>
 			<Grid container spacing={2} style={{paddingTop: 15}}>
 			{(fetching
 					? <p>Loading...</p>
-					: cards.map(card => {
+					: ((cards.length > 0) ? cards.map(card => {
 					return (
 						<Grid key={card.name} className={styles.card} item xs={12} md={6} lg={4}>
 							<Pokecard url={card.url}/>
 						</Grid>
-					)
-			}))}
+					)}) : <Typography variant="h6">No Favourites!</Typography>)
+			)}
 
 			</Grid>
 		</>

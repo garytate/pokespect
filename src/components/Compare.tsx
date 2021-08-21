@@ -53,8 +53,6 @@ export default function Compare(props: any) {
 		.then(res => {
 			let dataTable: any = {}
 
-			console.log(res.data.types)
-
 			dataTable.name = NameFormat(res.data.name);
 			dataTable.index = "#" + IndexFormat(res.data.id);
 			dataTable.stats = res.data.stats;

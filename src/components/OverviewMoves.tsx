@@ -40,7 +40,6 @@ function OverviewMovesRow(props: any) {
 	useEffect(() => {
 		axios.get(props.url)
 			.then(res => {
-				console.log(res.data)
 				let tempMove = {
 					name: res.data.name,
 					id: res.data.id,

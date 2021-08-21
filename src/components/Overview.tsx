@@ -3,7 +3,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
-import PokeStats from "./OverviewStats";
+import OverviewStats from "./OverviewStats";
 
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Trivia from "./OverviewTrivia";
@@ -94,7 +94,7 @@ export default function Overview(props: any) {
 				})}
 			</Grid>
 			<Grid item xs={12} md={8}>
-			<PokeStats stats={overview.stats} />
+			<OverviewStats stats={overview.stats} />
 			</Grid>
 			<Grid item md={6} xs={12}>
 				<Trivia pokemon={overview} />
