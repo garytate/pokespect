@@ -1,6 +1,8 @@
 # <h1 align="center">pokespect</h1>
 Pokespect is a lightweight, modern Pokedex - harnessing the PokeAPI project to provide a fast and responsive Pokedex.
 
+A demo can be found on my website, [here.](https://garytate.co.uk/pokespect/#/)
+
 Built from scratch with [React](https://reactjs.org/), [TypeScript](https://www.typescriptlang.org/), [Material-UI](https://material-ui.com/) and more.
 
 ## 💻 Getting Started
