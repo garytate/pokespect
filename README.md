@@ -4,7 +4,6 @@ Pokespect is a lightweight, modern Pokedex - harnessing the PokeAPI project to p
 Built from scratch with [React](https://reactjs.org/), [TypeScript](https://www.typescriptlang.org/), [Material-UI](https://material-ui.com/) and more.
 
 ## 💻 Getting Started
------
 ### Prerequisites
 
 To run pokespect, you will need Node.JS installed.
@@ -24,7 +23,6 @@ npm run start
 The application will open on port `3000` by default.
 
 ## 📘 Libraries / Modules
------
 ### Material UI
 For the styling aspect of this application, I used Material UI to allow for quick prototyping of functionality, to be able to focus my time mainly on the functionality of the page.
 
@@ -32,7 +30,6 @@ For the styling aspect of this application, I used Material UI to allow for quic
 To simplify the HTTP requests from the pokeapi server, Axios was an ideal choice to process fast and readable HTTP requests in my program.
 
 ## ⌚ Challenges
------
 ### Generations
 I spent a while confused at the PokeAPI documentation, trying to figure out where generations are held as a property on each pokemon.  After looking at the large list of Pokemon, I realised that the Pokemon were ordered by generation - allowing me to setup a constant lookup table which I could reference.
 
@@ -43,12 +40,10 @@ When I first began the project, I was unsure as to how to design the website - d
 When I first began the project, I was unsure as to how to design the website - due to the time constraints, I began building the application immediately with little to no styling, beginning to construct small design ideas once the main structure was finished.  I also referenced ideas from several other websites, including the official Pokedex.
 
 ## ✨ Extra Features
------
 ### Search Bar
 Using MaterialUI components, I built a search bar which is able to search throughout the pokedex and provide auto-complete functionality to find the pokemon you are looking for.  To do this, I decided to include an array in `data.ts` which would map out all the pokemon and the corresponding ID. I decided that it was worth the extra file size to include the information, as it was constantly referenced and would not be efficient to continiously fetch from the API, especially given the 20 limit on each call.
 
 ## 🌗 Future Additions
------
 ### Design Improvements
 Given the time constraints for the project, I was required to cut a lot of corners on the overall design of the web app. A main issue I would fix is the "Search Pokedex" and "Generation" buttons on the main browser, as they do not fit in with the design of the application.
 
