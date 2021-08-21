@@ -44,6 +44,9 @@ When I first began the project, I was unsure as to how to design the website - d
 Using MaterialUI components, I built a search bar which is able to search throughout the pokedex and provide auto-complete functionality to find the pokemon you are looking for.  To do this, I decided to include an array in `data.ts` which would map out all the pokemon and the corresponding ID. I decided that it was worth the extra file size to include the information, as it was constantly referenced and would not be efficient to continiously fetch from the API, especially given the 20 limit on each call.
 
 ## 🌗 Future Additions
+
+### Testing
+Now that the application has been developed to a point it can be used, testing is important to add and implement properly - to catch issues and any edge-cases which I would not discover myself.  Given the time constraints during the project, I was unable to add tests - however they will be added soon as I continue to improve on this project.
 ### Design Improvements
 Given the time constraints for the project, I was required to cut a lot of corners on the overall design of the web app. A main issue I would fix is the "Search Pokedex" and "Generation" buttons on the main browser, as they do not fit in with the design of the application.
 
