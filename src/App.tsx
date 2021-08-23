@@ -48,10 +48,6 @@ const useStyles = makeStyles({
 function App() {
 	const styles = useStyles();
 
-	useEffect(() => {
-		document.title = "pokespect";
-	}, []);
-
 	return (
 		<ThemeProvider theme={theme}>
 			<Router>
