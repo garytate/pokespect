@@ -11,7 +11,7 @@ import {
 	Typography,
 } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
-import { IndexFormat } from "../utils/StringFormat";
+import { IndexFormat, NameFormat } from "../utils/StringFormat";
 
 const useStyles = makeStyles({
 	card: {
@@ -33,7 +33,6 @@ const useStyles = makeStyles({
 	},
 });
 
-// TODO use color from pokemon-color fetch
 export default function OverviewTrivia(props: any) {
 	const classes = useStyles();
 	const [rows, setRows] = useState<[[string, string]]>();
@@ -41,12 +40,12 @@ export default function OverviewTrivia(props: any) {
 	useEffect(() => {
 		const tempRows: any = [];
 
-		tempRows.push(["Name", props.pokemon.name.toUpperCase()]);
+		tempRows.push(["NAME", NameFormat(props.pokemon.name)]);
 		tempRows.push([
-			"Ability",
-			props.pokemon.abilities[0].ability.name.toUpperCase(),
+			"ABILITY",
+			NameFormat(props.pokemon.abilities[0].ability.name),
 		]);
-		tempRows.push(["Index", "#" + IndexFormat(props.pokemon.index)]);
+		tempRows.push(["INDEX", "#" + IndexFormat(props.pokemon.index)]);
 
 		setRows(tempRows);
 

@@ -15,7 +15,7 @@ import {
 import TypeBadges from "./TypeBadges";
 
 import { FavoriteBorder, Favorite } from "@material-ui/icons";
-import { IndexFormat } from "../utils/StringFormat";
+import { IndexFormat, NameFormat } from "../utils/StringFormat";
 import { IPokemonCard } from "../types/PokecardCard";
 import { fetchPokemonCard } from "../api/PokemonAPI";
 
@@ -146,7 +146,7 @@ const Pokecard: React.FC<Props> = ({ url }) => {
 						to={`/pokemon/${pokemon.index}`}
 					>
 						<Typography className={styles.text} variant="h4" align="right">
-							{pokemon.name}
+							{NameFormat(pokemon.name)}
 						</Typography>
 					</Link>
 					<div className={styles.types}>
