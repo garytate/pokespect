@@ -47,6 +47,8 @@ Using MaterialUI components, I built a search bar which is able to search throug
 
 ## 🌗 Future Additions
 
+As this is a project I have greatly enjoyed, I have decided to continue supporting and updating pokespect going forward from the project.
+
 ### Testing
 Now that the application has been developed to a point it can be used, testing is important to add and implement properly - to catch issues and any edge-cases which I would not discover myself.  Given the time constraints during the project, I was unable to add tests - however they will be added soon as I continue to improve on this project.
 ### Design Improvements
