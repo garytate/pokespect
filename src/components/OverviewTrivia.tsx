@@ -33,7 +33,7 @@ const useStyles = makeStyles({
 	},
 });
 
-export default function OverviewTrivia(props: any) {
+const OverviewTrivia = (props: any) => {
 	const classes = useStyles();
 	const [rows, setRows] = useState<[[string, string]]>();
 
@@ -86,4 +86,6 @@ export default function OverviewTrivia(props: any) {
 			</CardContent>
 		</Card>
 	);
-}
+};
+
+export default OverviewTrivia;

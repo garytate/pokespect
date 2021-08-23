@@ -1,11 +1,6 @@
 import { FormControl, InputLabel, Select } from "@material-ui/core";
 import React from "react";
 
-// export interface BrowserFiltersProps extends React.ElementType {
-// 	handleClick: Function;
-// 	item: Boolean;
-// }
-
 const BrowserFilters: React.FC<any> = (props: any) => {
 	const handleGenChange = (event: any) => {
 		let gen = event.target.value !== "" ? event.target.value : 0;

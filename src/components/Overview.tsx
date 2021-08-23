@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-export default function Overview(props: any) {
+const Overview = (props: any) => {
 	const { index } = useParams<{ index: string }>();
 	const [overview, setOverview] = useState<IPokemonInformation>();
 
@@ -88,4 +88,6 @@ export default function Overview(props: any) {
 			</Grid>
 		</Container>
 	);
-}
+};
+
+export default Overview;

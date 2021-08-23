@@ -6,7 +6,6 @@ import { POKEMON_LIST } from "../data";
 import { useHistory } from "react-router-dom";
 
 const BrowserSearch: React.FC<any> = () => {
-	// export default function BrowserSearch(props: any) {
 	const history = useHistory();
 
 	const handleOnChange = (event: any, value: any) => {
@@ -19,7 +18,7 @@ const BrowserSearch: React.FC<any> = () => {
 
 	return (
 		<Autocomplete
-			id="combo-box-demo"
+			id="pokedex-autocomplete"
 			options={POKEMON_LIST}
 			getOptionLabel={(option) => option.identifier}
 			style={{ width: "25vh" }}

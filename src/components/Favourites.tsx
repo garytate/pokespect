@@ -15,7 +15,8 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-export default function Favourites() {
+// TODO remove the need for a duplicate browser for favourites
+const Favourites = () => {
 	const [cards, setCards] = useState<any[]>([]);
 	const [fetching, setFetching] = useState(true);
 
@@ -64,4 +65,6 @@ export default function Favourites() {
 			</Grid>
 		</Container>
 	);
-}
+};
+
+export default Favourites;

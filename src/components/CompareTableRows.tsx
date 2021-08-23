@@ -4,10 +4,6 @@ import { IPokemonInformation } from "../types/PokemonOverview";
 import { IndexFormat, NameFormat } from "../utils/StringFormat";
 import TypeBadges from "./TypeBadges";
 
-export interface ICompareTableRows {
-	comparedPokemon: IPokemonInformation[];
-}
-
 // Array of all variables which are compared, and which order they are presented in
 const columns = [
 	"name",
@@ -68,6 +64,10 @@ const useStyles = makeStyles({
 		textAlign: "center",
 	},
 });
+
+export interface ICompareTableRows {
+	comparedPokemon: IPokemonInformation[];
+}
 
 const CompareTableRows: React.FC<ICompareTableRows> = ({ comparedPokemon }) => {
 	const classes = useStyles();
