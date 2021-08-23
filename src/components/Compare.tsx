@@ -1,13 +1,10 @@
 import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody, makeStyles, Container } from "@material-ui/core";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
-import GetPokemonInformation from "../api/PokemonAPI";
+import { fetchPokemonInformation } from "../api/PokemonAPI";
 import { IPokemonInformation } from "../types/PokemonOverview";
-import { NameFormat, IndexFormat } from "../utils/StringFormat";
 import CompareSearch from "./CompareSearch";
 import CompareTableRows from "./CompareTableRows";
-import TypeBadges from "./TypeBadges";
 
 const useStyles = makeStyles({
 	table: {
@@ -52,7 +49,7 @@ const Compare: React.FC = () => {
 		setLoading(true);
 
 		try {
-			const pokemonInformation = await GetPokemonInformation(index);
+			const pokemonInformation = await fetchPokemonInformation(index);
 
 			let updatedArray = comparedPokemon || [];
 			updatedArray[position] = pokemonInformation;

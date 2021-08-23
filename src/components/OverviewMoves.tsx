@@ -1,6 +1,7 @@
 import { makeStyles, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, CssBaseline, Typography, Card, CardContent } from "@material-ui/core";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { fetchMoveInformation } from "../api/PokemonAPI";
+import { IPokemonMove } from "../types/PokemonOverview";
 import { NameFormat } from "../utils/StringFormat";
 import TypeBadges from "./TypeBadges";
 
@@ -26,37 +27,25 @@ const useStyles = makeStyles({
 	}
 });
 
-	// tempStats.push({
-			// 	base: stat.base_stat,
-			// 	effort: stat.effort,
-			// 	name: stat.stat.name.replace("special-", "SP ")
-			// })
-
 function OverviewMovesRow(props: any) {
-	const [move, setMove] = useState<any>({});
-	const [loading, setLoading] = useState(true);
+	const [move, setMove] = useState<IPokemonMove>();
 	const classes = useStyles();
 
 	useEffect(() => {
-		axios.get(props.url)
-			.then(res => {
-				let tempMove = {
-					name: res.data.name,
-					id: res.data.id,
-					type: res.data.type.name,
-					accuracy: res.data.accuracy || "-",
-					pp: res.data.pp,
-					power: res.data.power || "-"
-				}
+		(async () => {
+			try {
+				const moveInfo = await fetchMoveInformation(props.url);
 
-				setMove(tempMove);
-				setLoading(false);
-				 });
+				setMove(moveInfo)
+			} catch (err) {
+				console.error(err)
+			}
+		})();
 
 			// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	if (loading) return <p>Loading</p>
+	if (!move) return <p>Loading</p>
 
 	return (
 				<TableRow key={move.name}>
@@ -78,7 +67,7 @@ export default function OverviewMoves(props: any) {
 		let tempRows: any[] = []
 
 		for (const move of props.moves) {
-			tempRows.push(<OverviewMovesRow url={move.move.url} />)
+			tempRows.push(<OverviewMovesRow key={move.move.name} url={move.move.url} />)
 		}
 
 		setMoveRows(tempRows);
@@ -87,7 +76,7 @@ export default function OverviewMoves(props: any) {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	if (loading) return (<p>loading</p>)
+	if (loading) return (<></>)
 
 	return (
 		<Card className={classes.card}>

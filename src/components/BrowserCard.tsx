@@ -7,7 +7,7 @@ import TypeBadges from "./TypeBadges";
 
 import { FavoriteBorder, Favorite } from '@material-ui/icons';
 import { NameFormat, IndexFormat } from "../utils/StringFormat";
-import { PokemonCard } from "../types/PokecardCard";
+import { IPokemonCard } from "../types/PokecardCard";
 
 const cardStyles = makeStyles((theme: Theme) => ({
 	container: {
@@ -61,7 +61,7 @@ export interface Props {
 
 const Pokecard: React.FC<Props> = ({ url }) => {
 	const styles = cardStyles();
-	const [pokemon, setPokemon] = useState<PokemonCard>();
+	const [pokemon, setPokemon] = useState<IPokemonCard>();
 	const [fetching, setFetching] = useState(true);
 	const [isFavourite, setIsFavourite] = useState(false);
 

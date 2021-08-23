@@ -1,5 +1,4 @@
-import { Button, Container, CssBaseline, Grid, Typography } from "@material-ui/core";
-import axios from "axios";
+import { Button, Container, Grid, Typography } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
@@ -11,6 +10,7 @@ import TypeBadges from "./TypeBadges";
 import OverviewMoves from "./OverviewMoves";
 import { NameFormat } from "../utils/StringFormat";
 import { IPokemonInformation } from "../types/PokemonOverview";
+import { fetchPokemonInformation } from "../api/PokemonAPI";
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -24,46 +24,29 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function Overview(props: any) {
 	const { index } = useParams<{index: string}>();
 	const [overview, setOverview] = useState<IPokemonInformation>();
-	const [fetching, setFetching] = useState(true);
-	const [types, setTypes] = useState<string[]>([]);
 
 	const styles = useStyles();
 
 	useEffect(() => {
-		axios.get(`https://pokeapi.co/api/v2/pokemon/${index}/`)
-		.then(res => {
-			setOverview({
-				name: res.data.name,
-				index: res.data.id,
-				types: res.data.types,
-				stats: res.data.stats,
-				moves: res.data.moves,
-				icon: res.data.sprites.other["official-artwork"].front_default,
-				category: "",
-				abilities: res.data.abilities
-			})
+		(async() => {
+			try {
+				const pokemonInformation = await fetchPokemonInformation(index);
 
-			// // TODO rework method of gathering array data
-			let types = res.data.types
-			let typesArray: string[] = []
-			for (const type of types) {
-				typesArray.push(type.type.name)
+				setOverview(pokemonInformation);
+			} catch (err) {
+				console.error(err);
 			}
 
-			setTypes(typesArray);
-
-			setFetching(false);
-		})
-
+		})()
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	if (fetching || !overview) return (<p>loading...</p>)
+	if (!overview) return (<p>loading...</p>)
 
 	return (
 		<Container>
 
-		<Grid container>
+		<Grid container spacing={2} style={{marginTop: 2}}>
 			<Grid item xs={12} md={4}>
 				<Link to="/"><Typography variant="h6" style={{paddingTop: 20, textDecoration: "none"}}>Return to Pokedex</Typography></Link>
 			</Grid>
@@ -78,8 +61,8 @@ export default function Overview(props: any) {
 				</Link>
 			</Grid>
 			<Grid item md={4} xs={12}>
-				<img alt={overview.name} className={styles.image} src={overview.icon} />
-				{types.map(type => {
+				<img alt={overview.name} className={styles.image} src={overview.artwork} />
+				{overview.types.map((type: any) => {
 					return (
 						<TypeBadges key={type} label={type} />
 					)
