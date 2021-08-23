@@ -1,7 +1,12 @@
-import { FormControl, InputLabel, Select } from "@material-ui/core";
+import { FormControl, Grid, InputLabel, Select } from "@material-ui/core";
 import React from "react";
 
-export default function Filters(props: any) {
+// export interface BrowserFiltersProps {
+// 	handleClick: Function;
+// 	item: Boolean;
+// }
+
+const BrowserFilters: React.FC<any> = (props: any) => {
 	const handleGenChange = (event: any) => {
 		let gen = event.target.value !== "" ? event.target.value : 0
 
@@ -30,3 +35,5 @@ export default function Filters(props: any) {
 		</div>
 	)
 }
+
+export default BrowserFilters;

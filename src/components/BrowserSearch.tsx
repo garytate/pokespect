@@ -7,7 +7,8 @@ import { Autocomplete } from "@material-ui/lab";
 import { POKEMON_LIST } from "../data";
 import { useHistory } from "react-router-dom";
 
-export default function BrowserSearch(props: any) {
+const BrowserSearch: React.FC<any> = () => {
+// export default function BrowserSearch(props: any) {
 	const history = useHistory();
 
 	const handleOnChange = (event: any, value: any) => {
@@ -35,3 +36,5 @@ export default function BrowserSearch(props: any) {
 		/>
 	);
 }
+
+export default BrowserSearch;

@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { Card, CardContent, CardMedia, CircularProgress, Grid, IconButton, makeStyles, Typography } from "@material-ui/core";
+import { Card, CardContent, CardMedia, CircularProgress, Grid, IconButton, makeStyles, Theme, Typography } from "@material-ui/core";
 import TypeBadges from "./TypeBadges";
 
 import { FavoriteBorder, Favorite } from '@material-ui/icons';
 import { NameFormat, IndexFormat } from "../utils/StringFormat";
+import { PokemonCard } from "../types/PokecardCard";
 
-const cardStyles = makeStyles((theme: any) => ({
+const cardStyles = makeStyles((theme: Theme) => ({
 	container: {
 		display: "flex",
 		width: "380px",
@@ -54,13 +55,19 @@ const cardStyles = makeStyles((theme: any) => ({
 	}
 }));
 
-export default function Pokecard(props: any) {
+export interface Props {
+	url: string
+}
+
+const Pokecard: React.FC<Props> = ({ url }) => {
 	const styles = cardStyles();
-	const [pokemon, setPokemon] = useState({name: "Generic Pokemon", sprite: "", index: 0, prettyIndex: "000", types: ["fire"]});
+	const [pokemon, setPokemon] = useState<PokemonCard>();
 	const [fetching, setFetching] = useState(true);
 	const [isFavourite, setIsFavourite] = useState(false);
 
 	const favouritePokemon = () => {
+		if (!pokemon) return;
+
 		const favList = localStorage.getItem("favourites");
 		const favJSON = favList ? JSON.parse(favList) : {}
 
@@ -75,21 +82,17 @@ export default function Pokecard(props: any) {
 	}
 
 	useEffect(() => {
-		axios.get(props.url)
+		axios.get(url)
 		.then(res => {
-			let types: string[] = []
-			for (const type of res.data.types) {
-				types.push(type.type.name)
-			}
+			let { name, id, sprites, types } = res.data;
 
-			let name = NameFormat(res.data.name);
-			let index = IndexFormat(res.data.id);
+			types = types.map((type: any) => type.type.name);
+			name = NameFormat(name);
 
 			setPokemon({
 				name: name,
-				sprite: res.data.sprites.other["official-artwork"].front_default,
-				prettyIndex: index,
-				index: res.data.id,
+				sprite: sprites.other["official-artwork"].front_default,
+				index: id,
 				types: types
 			})
 
@@ -103,7 +106,7 @@ export default function Pokecard(props: any) {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	if (fetching) return (<CircularProgress />);
+	if (fetching || !pokemon) return (<CircularProgress />);
 
 	// TODO add functionality to the favourite button
 	return (
@@ -121,7 +124,7 @@ export default function Pokecard(props: any) {
 					<Grid container className={styles.heartGrid}>
 						<Grid item xs={10} className={styles.heartGrid}>
 							<Typography className={styles.text} style={{color: "#BBC1CD"}} variant="h6">
-								#{pokemon.prettyIndex}
+								#{IndexFormat(pokemon.index)}
 							</Typography>
 						</Grid>
 						<Grid item xs={2}>
@@ -154,4 +157,4 @@ export default function Pokecard(props: any) {
 	)
 }
 
-//
+export default Pokecard;

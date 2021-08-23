@@ -2,6 +2,7 @@ import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody, makeS
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
+import { PokemonOverview } from "../types/PokemonOverview";
 import { NameFormat, IndexFormat } from "../utils/StringFormat";
 import CompareSearch from "./CompareSearch";
 import TypeBadges from "./TypeBadges";
@@ -25,15 +26,15 @@ const useStyles = makeStyles({
 	}
   });
 
-  const columns = ["sprite", "name", "index", "types", "height", "weight", "attack", "defense", "hp", "special-attack", "special-defense", "speed"]
+const columns = ["sprite", "name", "index", "types", "height", "weight", "attack", "defense", "hp", "special-attack", "special-defense", "speed"]
 
-export default function Compare(props: any) {
+const Compare: React.FC = () => {
 	const {index, compare} = useParams<{index: string, compare: string}>();
 	const classes = useStyles();
 	const history = useHistory();
 
-	const [leftPokemon, setLeftPokemon] = useState<any>({});
-	const [rightPokemon, setRightPokemon] = useState<any>({});
+	const [leftPokemon, setLeftPokemon] = useState<PokemonOverview>();
+	const [rightPokemon, setRightPokemon] = useState<PokemonOverview>();
 	const [loading, setLoading] = useState(0);
 
 	const onSearchUpdated = (newIndex: string, position: number) => {
@@ -92,6 +93,8 @@ export default function Compare(props: any) {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
+	if (!leftPokemon || !rightPokemon) return <p>hi</p>;
+
 	return (
 	<Container maxWidth="sm">
 		<TableContainer>
@@ -121,3 +124,5 @@ export default function Compare(props: any) {
 	</Container>
 	)
 }
+
+export default Compare;

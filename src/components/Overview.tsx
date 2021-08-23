@@ -10,17 +10,9 @@ import Trivia from "./OverviewTrivia";
 import TypeBadges from "./TypeBadges";
 import OverviewMoves from "./OverviewMoves";
 import { NameFormat } from "../utils/StringFormat";
+import { PokemonOverview } from "../types/PokemonOverview";
 
-interface PokemonOverview {
-	name: "Generic Pokemon";
-	index: 0;
-	types: {};
-	abilities: {};
-	moves: {};
-	stats: {};
-	icon: "";
-	category: "";
-}
+
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
