@@ -23,7 +23,7 @@ const TypeColors: { [key: string]: string } = {
 	fairy: "#D685AD",
 };
 
-export default function TypeBadges(props: any) {
+const TypeBadges = (props: any) => {
 	const [color, setColor] = useState("");
 
 	useEffect(() => {
@@ -50,4 +50,6 @@ export default function TypeBadges(props: any) {
 			label={props.label.toUpperCase()}
 		/>
 	);
-}
+};
+
+export default TypeBadges;

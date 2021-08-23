@@ -65,11 +65,11 @@ const cardStyles = makeStyles((theme: Theme) => ({
 	},
 }));
 
-export interface Props {
+export interface BrowserCardProps {
 	url: string;
 }
 
-const Pokecard: React.FC<Props> = ({ url }) => {
+const Pokecard: React.FC<BrowserCardProps> = ({ url }) => {
 	const styles = cardStyles();
 	const [pokemon, setPokemon] = useState<IPokemonCard>();
 	const [isFavourite, setIsFavourite] = useState(false);

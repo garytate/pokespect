@@ -39,7 +39,9 @@ const Compare: React.FC = () => {
 	const classes = useStyles();
 	const history = useHistory();
 
-	const [comparedPokemon, setComparedPokemon] = useState<IPokemonInformation[]>([]);
+	const [comparedPokemon, setComparedPokemon] = useState<IPokemonInformation[]>(
+		[]
+	);
 	const [loading, setLoading] = useState(false);
 
 	const onSearchUpdated = (newIndex: string, position: number) => {

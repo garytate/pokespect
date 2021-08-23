@@ -39,7 +39,9 @@ const useStyles = makeStyles({
 	},
 });
 
-function OverviewMovesRow(props: any) {
+
+
+const OverviewMovesRow = (props: any) => {
 	const [move, setMove] = useState<IPokemonMove>();
 	const classes = useStyles();
 
@@ -66,9 +68,9 @@ function OverviewMovesRow(props: any) {
 			<TableCell className={classes.tableKey}>{move.pp}</TableCell>
 		</TableRow>
 	);
-}
+};
 
-export default function OverviewMoves(props: any) {
+const OverviewMoves = (props: any) => {
 	const [moveRows, setMoveRows] = useState<any[]>([]);
 	const [loading, setLoading] = useState(true);
 	const classes = useStyles();
@@ -120,4 +122,6 @@ export default function OverviewMoves(props: any) {
 			</CardContent>
 		</Card>
 	);
-}
+};
+
+export default OverviewMoves;

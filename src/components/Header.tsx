@@ -14,7 +14,7 @@ const useStyles = makeStyles({
 });
 
 // TODO do the responsiveness properly
-export default function Header() {
+const Header = () => {
 	const styles = useStyles();
 
 	return (
@@ -50,4 +50,6 @@ export default function Header() {
 			</Grid>
 		</Grid>
 	);
-}
+};
+
+export default Header;

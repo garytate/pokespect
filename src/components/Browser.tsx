@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-export default function Browser() {
+const Browser: React.FC = () => {
 	const [gen, setGen] = useState(0);
 	const [cards, setCards] = useState<PokecardData[]>([]);
 	const [nextPage, setNextPage] = useState<string>();
@@ -96,4 +96,6 @@ export default function Browser() {
 			</IconButton>
 		</Container>
 	);
-}
+};
+
+export default Browser;

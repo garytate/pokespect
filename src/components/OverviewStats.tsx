@@ -62,7 +62,7 @@ const LinearProgressWithLabel = (props: any & { value: number }) => {
 	);
 };
 
-export default function OverviewStats(props: any) {
+const OverviewStats = (props: any) => {
 	const [stats, setStats] = useState<any[]>([{}]);
 	const [loading, setLoading] = useState(true);
 	const classes = useStyles();
@@ -123,4 +123,6 @@ export default function OverviewStats(props: any) {
 			</CardContent>
 		</Card>
 	);
-}
+};
+
+export default OverviewStats;
