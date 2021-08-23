@@ -42,7 +42,7 @@ const Compare: React.FC = () => {
 	const [comparedPokemon, setComparedPokemon] = useState<IPokemonInformation[]>(
 		[]
 	);
-	const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState(false);
 
 	const onSearchUpdated = (newIndex: string, position: number) => {
 		if (position === 0) {
@@ -57,13 +57,13 @@ const Compare: React.FC = () => {
 	const handleInfoFetch = async (index: string, position: number) => {
 		if (index === "0") return;
 
-		setLoading(true);
-
 		fetchPokemonInformation(index).then((data) => {
 			let updatedArray = comparedPokemon || [];
 			updatedArray[position] = data;
 			setComparedPokemon(updatedArray);
 
+			// TODO Remove this forced-rerender ASAP
+			setLoading(true);
 			setLoading(false);
 		});
 	};
