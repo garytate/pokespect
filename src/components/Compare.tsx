@@ -2,7 +2,7 @@ import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody, makeS
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
-import { PokemonOverview } from "../types/PokemonOverview";
+import { IPokemonOverview } from "../types/PokemonOverview";
 import { NameFormat, IndexFormat } from "../utils/StringFormat";
 import CompareSearch from "./CompareSearch";
 import TypeBadges from "./TypeBadges";
@@ -28,13 +28,23 @@ const useStyles = makeStyles({
 
 const columns = ["sprite", "name", "index", "types", "height", "weight", "attack", "defense", "hp", "special-attack", "special-defense", "speed"]
 
+const DefaultPokemonData = {
+	name: "a",
+	icon: "a",
+	category: "a",
+	index: 1,
+	types: {},
+	abilities: {},
+	stats: {},
+}
+
 const Compare: React.FC = () => {
 	const {index, compare} = useParams<{index: string, compare: string}>();
 	const classes = useStyles();
 	const history = useHistory();
 
-	const [leftPokemon, setLeftPokemon] = useState<PokemonOverview>();
-	const [rightPokemon, setRightPokemon] = useState<PokemonOverview>();
+	const [leftPokemon, setLeftPokemon] = useState<IPokemonOverview>(DefaultPokemonData);
+	const [rightPokemon, setRightPokemon] = useState<IPokemonOverview>(DefaultPokemonData);
 	const [loading, setLoading] = useState(0);
 
 	const onSearchUpdated = (newIndex: string, position: number) => {
@@ -52,20 +62,16 @@ const Compare: React.FC = () => {
 
 		axios.get(`https://pokeapi.co/api/v2/pokemon/${index}/`)
 		.then(res => {
-			let dataTable: any = {}
-
-			dataTable.name = NameFormat(res.data.name);
-			dataTable.index = "#" + IndexFormat(res.data.id);
-			dataTable.stats = res.data.stats;
-			dataTable.height = res.data.height + 'cm';
-			dataTable.weight = res.data.weight + 'kg';
-			dataTable.sprite = <img alt={res.data.name} src={res.data.sprites.front_default} />
-			dataTable.types = []
-
-			for (const type in res.data.types) {
-				let typeName = res.data.types[type].type.name;
-
-				dataTable.types.push(<TypeBadges key={typeName} label={typeName} style={{width: "200px"}}/>)
+			let dataTable: IPokemonOverview = {
+				name: NameFormat(res.data.name),
+				index: res.data.id,
+				category: res.data.category,
+				abilities: res.data.abilities,
+				stats: res.data.stats,
+				height: res.data.height,
+				weight: res.data.weight,
+				icon: res.data.sprites.front_default,
+				types: (res.data.types.map((type: any) => type.type.name))
 			}
 			//	dataTable.types = res.data.types
 
@@ -111,9 +117,9 @@ const Compare: React.FC = () => {
 					columns.map(column => {
 						return (
 							<TableRow key={column}>
-								<TableCell className={classes.cell}>{leftPokemon[column]}</TableCell>
-								<TableCell className={classes.cellKey}>{NameFormat(column)}</TableCell>
-								<TableCell className={classes.cell}>{rightPokemon[column]}</TableCell>
+								<TableCell className={classes.cell}>dev</TableCell>
+								<TableCell className={classes.cellKey}>dev</TableCell>
+								<TableCell className={classes.cell}>dev</TableCell>
 							</TableRow>
 						)
 					})
@@ -126,3 +132,13 @@ const Compare: React.FC = () => {
 }
 
 export default Compare;
+
+// columns.map(column => {
+// 	return (
+// 		<TableRow key={column}>
+// 			<TableCell className={classes.cell}>{leftPokemon[column]}</TableCell>
+// 			<TableCell className={classes.cellKey}>{NameFormat(column)}</TableCell>
+// 			<TableCell className={classes.cell}>{rightPokemon[column]}</TableCell>
+// 		</TableRow>
+// 	)
+// })

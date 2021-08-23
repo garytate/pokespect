@@ -1,7 +1,7 @@
 import { FormControl, Grid, InputLabel, Select } from "@material-ui/core";
 import React from "react";
 
-// export interface BrowserFiltersProps {
+// export interface BrowserFiltersProps extends React.ElementType {
 // 	handleClick: Function;
 // 	item: Boolean;
 // }
