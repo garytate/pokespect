@@ -5,7 +5,7 @@ import Pokecard from "./BrowserCard";
 import Filters from "./BrowserFilters";
 
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import { Grid, IconButton } from "@material-ui/core";
+import { Container, Grid, IconButton } from "@material-ui/core";
 import { ExpandMore } from "@material-ui/icons";
 import BrowserSearch from "./BrowserSearch";
 
@@ -23,8 +23,12 @@ const useStyles = makeStyles((theme: Theme) =>
 		card: {
 			alignItems: "center",
 			justifyContent: "center",
-			display: "grid"
+			display: "grid",
+			padding: 10
 		},
+		browser: {
+			marginTop: 2
+		}
 	}),
 );
 
@@ -60,10 +64,10 @@ export default function Browser() {
 	}, [gen]);
 
 	return (
-		<>
-			<Grid container spacing={2} alignItems="center" justifyContent="center">
-				<BrowserSearch item xs={6}/>
-				<Filters item xs={6} handleClick={handleGen} />
+		<Container>
+			<Grid container alignItems="center" justifyContent="center">
+				<BrowserSearch item md={6} />
+				<Filters item md={6} handleClick={handleGen} />
 			</Grid>
 
 			<Grid container spacing={2}>
@@ -79,9 +83,10 @@ export default function Browser() {
 
 			</Grid>
 
+
 			<IconButton onClick={handleLoadMore} aria-label="load-more">
 				<ExpandMore fontSize="large" style={{color: "#283E58"}} />
 			</IconButton>
-		</>
+		</Container>
 	)
 }

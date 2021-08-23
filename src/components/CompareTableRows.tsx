@@ -1,24 +1,38 @@
 import { TableRow, TableCell, makeStyles } from "@material-ui/core";
 import React from "react";
 import { IPokemonInformation } from "../types/PokemonOverview";
-import { NameFormat } from "../utils/StringFormat";
+import { IndexFormat, NameFormat } from "../utils/StringFormat";
+import TypeBadges from "./TypeBadges";
 
 export interface ICompareTableRows {
 	comparedPokemon: IPokemonInformation[];
 }
 
-const columns = ["icon", "name", "index", "height"];
-// const columns = ["sprite", "name", "index", "types", "height", "weight", "attack", "defense", "hp", "special-attack", "special-defense", "speed"]
+// Array of all variables which are compared, and which order they are presented in
+const columns = ["name", "icon", "index", "types", "height", "weight", "attack", "defense", "hp", "special-attack", "special-defense", "speed"];
 
+// Allows for returning dynamic JSX depending on the row, such as using TypeBadges component for the types
 const getRowJSX = (row: string, pokemon: IPokemonInformation) => {
-	if (row === "name")
-		return <>{NameFormat(pokemon.name)}</>;
+	switch (row) {
+		case "name":
+			return <>{NameFormat(pokemon.name)}</>;
 
-	if (row === "icon")
-		return <img alt={pokemon.name} src={pokemon.icon} />;
+		case "icon":
+			return <img alt={pokemon.name} src={pokemon.icon} />;
 
+		case "index":
+			return '#' + IndexFormat(pokemon.index);
 
-	return pokemon[row];
+		case "types":
+			return <>{
+				Object.keys(pokemon.types).map((key, index) => {
+					return <TypeBadges key={pokemon.types[key]} label={pokemon.types[key]} style={{width: "200px"}}/>
+				})
+			}</>;
+
+		default:
+			return <>{pokemon[row]}</>;
+	}
 }
 
 const useStyles = makeStyles({
@@ -43,8 +57,9 @@ const CompareTableRows: React.FC<ICompareTableRows> = ({ comparedPokemon }) => {
 			columns.map((column: string) => {
 				return (
 					<TableRow key={column}>
-						<TableCell className={classes.cellKey}>-</TableCell>
+						<TableCell className={classes.cellKey}>{NameFormat(column)}</TableCell>
 						{
+							// Display each pokemon's value
 							comparedPokemon.map((pokemon: IPokemonInformation) => {
 								return <TableCell key={pokemon.name} className={classes.cell}>{getRowJSX(column, pokemon)}</TableCell>
 							})

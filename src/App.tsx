@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import "./App.css";
 
 import "@fontsource/roboto";
 import {
 	Container,
 	createTheme,
+	makeStyles,
 	ThemeProvider,
 } from "@material-ui/core";
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
@@ -30,17 +30,35 @@ const theme = createTheme({
 	},
 });
 
+const useStyles = makeStyles({
+	app: {
+		backgroundColor: "#f4f3ee",
+		textAlign: "center",
+		color: "#283e58",
+		minHeight: "100vh",
+		display: "flex",
+		flexFlow: "column",
+	},
+	container: {
+		backgroundColor: "#fbfaf5",
+		flexGrow: 1
+	}
+});
+
 function App() {
+	const styles = useStyles();
+
 	useEffect(() => {
 		document.title = "pokespect"
  }, []);
+
 	return (
 		<ThemeProvider theme={theme}>
 			<Router>
-				<div className="App">
+				<div className={styles.app}>
 					<Header />
 
-					<Container maxWidth="lg">
+					<Container className={styles.container} maxWidth="lg">
 						<Switch>
 							<Route exact path="/">
 								<Browser />
