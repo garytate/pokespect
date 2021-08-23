@@ -15,7 +15,6 @@ export default function CompareSearch(props: any) {
 		<CssBaseline />
 
 		<Autocomplete
-		id={props.current.name}
 		options={POKEMON_LIST}
 		getOptionLabel={(option) => option.identifier}
 		style={{ width: "100%" }}

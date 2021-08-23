@@ -1,22 +1,24 @@
 import { TableRow, TableCell, makeStyles } from "@material-ui/core";
 import React from "react";
 import { IPokemonInformation } from "../types/PokemonOverview";
+import { NameFormat } from "../utils/StringFormat";
 
 export interface ICompareTableRows {
-	left: string,
-	right: string
+	comparedPokemon: IPokemonInformation[];
 }
 
-const columns = ["sprite", "name", "index", "height"];
+const columns = ["icon", "name", "index", "height"];
+// const columns = ["sprite", "name", "index", "types", "height", "weight", "attack", "defense", "hp", "special-attack", "special-defense", "speed"]
 
-const leftPokemon = {
-	name: "-",
-	icon: "",
-	category: "-",
-	index: 1,
-	types: {},
-	abilities: {},
-	stats: {},
+const getRowJSX = (row: string, pokemon: IPokemonInformation) => {
+	if (row === "name")
+		return <>{NameFormat(pokemon.name)}</>;
+
+	if (row === "icon")
+		return <img alt={pokemon.name} src={pokemon.icon} />;
+
+
+	return pokemon[row];
 }
 
 const useStyles = makeStyles({
@@ -32,7 +34,7 @@ const useStyles = makeStyles({
 	}
 });
 
-const CompareTableRows: React.FC<ICompareTableRows> = ({ left, right }) => {
+const CompareTableRows: React.FC<ICompareTableRows> = ({ comparedPokemon }) => {
 	const classes = useStyles();
 
 	return (
@@ -42,8 +44,11 @@ const CompareTableRows: React.FC<ICompareTableRows> = ({ left, right }) => {
 				return (
 					<TableRow key={column}>
 						<TableCell className={classes.cellKey}>-</TableCell>
-						<TableCell className={classes.cell}>{left}</TableCell>
-						<TableCell className={classes.cell}>{right}</TableCell>
+						{
+							comparedPokemon.map((pokemon: IPokemonInformation) => {
+								return <TableCell key={pokemon.name} className={classes.cell}>{getRowJSX(column, pokemon)}</TableCell>
+							})
+						}
 					</TableRow>
 				)
 			})

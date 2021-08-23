@@ -28,31 +28,16 @@ const useStyles = makeStyles({
 	}
   });
 
-// const columns = ["sprite", "name", "index", "types", "height", "weight", "attack", "defense", "hp", "special-attack", "special-defense", "speed"]
-
-
-
-const DefaultPokemonData = {
-	name: "-",
-	icon: "",
-	category: "-",
-	index: 1,
-	types: {},
-	abilities: {},
-	stats: {},
-}
-
 const Compare: React.FC = () => {
 	const {index, compare} = useParams<{index: string, compare: string}>();
 	const classes = useStyles();
 	const history = useHistory();
 
-	const [leftPokemon, setLeftPokemon] = useState<IPokemonInformation>(DefaultPokemonData);
-	const [rightPokemon, setRightPokemon] = useState<IPokemonInformation>(DefaultPokemonData);
-	const [loading, setLoading] = useState(0);
+	const [comparedPokemon, setComparedPokemon] = useState<IPokemonInformation[]>([])
+	const [loading, setLoading] = useState(true);
 
 	const onSearchUpdated = (newIndex: string, position: number) => {
-		if (position === 1) {
+		if (position === 0) {
 			history.push(`/pokemon/${newIndex}/compare/${compare}`)
 		} else {
 			history.push(`/pokemon/${index}/compare/${newIndex}`)
@@ -64,30 +49,33 @@ const Compare: React.FC = () => {
 	const handleInfoFetch = async (index: string, position: number) => {
 		if (index === "0") return;
 
+		setLoading(true);
+
 		try {
 			const pokemonInformation = await GetPokemonInformation(index);
 
-			setLoading(loading + 1);
+			let updatedArray = comparedPokemon || [];
+			updatedArray[position] = pokemonInformation;
+			setComparedPokemon(updatedArray);
 
-			// TODO change this
-			if (position === 1) {
-				setLeftPokemon(pokemonInformation)
-			} else {
-				setRightPokemon(pokemonInformation)
-			}
+			setLoading(false);
 		} catch (err) {
 			console.error(err)
 		}
 	}
 
-	useEffect(() => {
-		handleInfoFetch(index, 1)
-		handleInfoFetch(compare, 2)
+	 useEffect(() => {
+		(async () => {
+			await handleInfoFetch(index, 0)
+			await handleInfoFetch(compare, 1)
+
+			setLoading(false);
+		})()
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	if (!leftPokemon || !rightPokemon) return <p>hi</p>;
+	if (loading) return <p>Loading...</p>
 
 	return (
 	<Container maxWidth="md">
@@ -96,12 +84,12 @@ const Compare: React.FC = () => {
 				<TableHead>
 					<TableRow>
 						<TableCell></TableCell>
-						<TableCell className={classes.header} align="center"><CompareSearch onSearch={onSearchUpdated} position={1} current={leftPokemon}/></TableCell>
-						<TableCell className={classes.header} align="center"><CompareSearch onSearch={onSearchUpdated} position={2} current={rightPokemon}/></TableCell>
+						<TableCell className={classes.header} align="center"><CompareSearch onSearch={onSearchUpdated} position={0}/></TableCell>
+						<TableCell className={classes.header} align="center"><CompareSearch onSearch={onSearchUpdated} position={1}/></TableCell>
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					<CompareTableRows left="1" right="2" />
+					<CompareTableRows comparedPokemon={comparedPokemon} />
 				</TableBody>
 			</Table>
 		</TableContainer>
@@ -110,36 +98,3 @@ const Compare: React.FC = () => {
 }
 
 export default Compare;
-
-// columns.map(column => {
-// 	return (
-// 		<TableRow key={column}>
-// 			<TableCell className={classes.cell}>{leftPokemon[column]}</TableCell>
-// 			<TableCell className={classes.cellKey}>{NameFormat(column)}</TableCell>
-// 			<TableCell className={classes.cell}>{rightPokemon[column]}</TableCell>
-// 		</TableRow>
-// 	)
-// })
-
-// <Table aria-label="simple table">
-// 				<TableHead>
-// 					<TableRow>
-// 						<TableCell className={classes.header} align="center"><CompareSearch onSearch={onSearchUpdated} position={1} current={leftPokemon}/></TableCell>
-// 						<TableCell></TableCell>
-// 						<TableCell className={classes.header} align="center"><CompareSearch onSearch={onSearchUpdated} position={2} current={rightPokemon}/></TableCell>
-// 					</TableRow>
-// 				</TableHead>
-// 				<TableBody >
-// 				{
-// 					columns.map(column => {
-// 						return (
-// 							<TableRow key={column}>
-// 								<TableCell className={classes.cell}>dev</TableCell>
-// 								<TableCell className={classes.cellKey}>dev</TableCell>
-// 								<TableCell className={classes.cell}>dev</TableCell>
-// 							</TableRow>
-// 						)
-// 					})
-// 				}
-// 				</TableBody>
-// 			</Table>
