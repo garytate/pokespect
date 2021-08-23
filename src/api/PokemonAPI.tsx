@@ -50,3 +50,18 @@ export const fetchPokemonPage = async (url: string) => {
 
 	return dataTable;
 }
+
+export const fetchPokemonCard = async (url: string) => {
+	const res = await axios.get(url);
+
+	const types = res.data.types.map((type: any) => type.type.name);
+
+	let dataTable = {
+		name: res.data.name,
+		sprite: res.data.sprites.other["official-artwork"].front_default,
+		index: res.data.id,
+		types: types
+	}
+
+	return dataTable
+}

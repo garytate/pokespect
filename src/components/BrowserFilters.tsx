@@ -1,4 +1,4 @@
-import { FormControl, Grid, InputLabel, Select } from "@material-ui/core";
+import { FormControl, InputLabel, Select } from "@material-ui/core";
 import React from "react";
 
 // export interface BrowserFiltersProps extends React.ElementType {

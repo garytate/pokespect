@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-
-import axios from "axios";
 import Pokecard from "./BrowserCard";
 import Filters from "./BrowserFilters";
 
@@ -36,7 +34,6 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function Browser() {
 	const [gen, setGen] = useState(0);
 	const [cards, setCards] = useState<PokecardData[]>([]);
-
 	const [nextPage, setNextPage] = useState<string>();
 
 	const styles = useStyles();

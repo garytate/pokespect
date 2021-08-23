@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 
-import axios from "axios";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardMedia, CircularProgress, Grid, IconButton, makeStyles, Theme, Typography } from "@material-ui/core";
 import TypeBadges from "./TypeBadges";
 
 import { FavoriteBorder, Favorite } from '@material-ui/icons';
-import { NameFormat, IndexFormat } from "../utils/StringFormat";
+import {  IndexFormat } from "../utils/StringFormat";
 import { IPokemonCard } from "../types/PokecardCard";
+import { fetchPokemonCard } from "../api/PokemonAPI";
 
 const cardStyles = makeStyles((theme: Theme) => ({
 	container: {
@@ -62,7 +62,6 @@ export interface Props {
 const Pokecard: React.FC<Props> = ({ url }) => {
 	const styles = cardStyles();
 	const [pokemon, setPokemon] = useState<IPokemonCard>();
-	const [fetching, setFetching] = useState(true);
 	const [isFavourite, setIsFavourite] = useState(false);
 
 	const favouritePokemon = () => {
@@ -82,33 +81,26 @@ const Pokecard: React.FC<Props> = ({ url }) => {
 	}
 
 	useEffect(() => {
-		axios.get(url)
-		.then(res => {
-			let { name, id, sprites, types } = res.data;
+		(async () => {
+			try {
+				const card = await fetchPokemonCard(url);
 
-			types = types.map((type: any) => type.type.name);
-			name = NameFormat(name);
+				setPokemon(card);
 
-			setPokemon({
-				name: name,
-				sprite: sprites.other["official-artwork"].front_default,
-				index: id,
-				types: types
-			})
+				const favList = localStorage.getItem("favourites");
+				const favJSON = favList ? JSON.parse(favList) : {}
 
-			setFetching(false);
+				setIsFavourite(favJSON[card.name]);
+			} catch ( err ) {
+				console.error(err)
+			}
+		})();
 
-			const favList = localStorage.getItem("favourites");
-			const favJSON = favList ? JSON.parse(favList) : {}
-
-			setIsFavourite(favJSON[res.data.name])
-		})
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	if (fetching || !pokemon) return (<CircularProgress />);
+	if (!pokemon) return (<CircularProgress />);
 
-	// TODO add functionality to the favourite button
 	return (
 		<Card className={styles.container} variant="outlined">
 			<Link className={styles.link} to={`/pokemon/${pokemon.index}`}>
