@@ -43,19 +43,15 @@ export default function Browser() {
 	};
 
 	const handleLoadMore = async () => {
-		try {
-			const offset = GenerationFirstPokemon[gen - 1];
-			const url =
-				nextPage ||
-				`https://pokeapi.co/api/v2/pokemon?limit=18&offset=${offset}`;
+		const offset = GenerationFirstPokemon[gen - 1];
+		const url = nextPage ||
+		`https://pokeapi.co/api/v2/pokemon?limit=18&offset=${offset}`;
 
-			const pageInfo = await fetchPokemonPage(url);
-
-			setCards(cards.concat(pageInfo.results));
-			setNextPage(pageInfo.next);
-		} catch (err) {
-			console.error(err);
-		}
+		fetchPokemonPage(url)
+		.then((data) => {
+			setCards(cards.concat(data.results));
+			setNextPage(data.next);
+		})
 	};
 
 	useEffect(() => {

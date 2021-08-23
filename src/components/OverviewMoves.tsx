@@ -44,15 +44,10 @@ function OverviewMovesRow(props: any) {
 	const classes = useStyles();
 
 	useEffect(() => {
-		(async () => {
-			try {
-				const moveInfo = await fetchMoveInformation(props.url);
-
-				setMove(moveInfo);
-			} catch (err) {
-				console.error(err);
-			}
-		})();
+		fetchMoveInformation(props.url)
+		.then((data) => {
+			setMove(data);
+		});
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);

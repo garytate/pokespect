@@ -59,26 +59,20 @@ const Compare: React.FC = () => {
 
 		setLoading(true);
 
-		try {
-			const pokemonInformation = await fetchPokemonInformation(index);
-
+		fetchPokemonInformation(index).
+		then((data) => {
 			let updatedArray = comparedPokemon || [];
-			updatedArray[position] = pokemonInformation;
+			updatedArray[position] = data;
 			setComparedPokemon(updatedArray);
 
 			setLoading(false);
-		} catch (err) {
-			console.error(err);
-		}
+		});
+
 	};
 
 	useEffect(() => {
-		(async () => {
-			await handleInfoFetch(index, 0);
-			await handleInfoFetch(compare, 1);
-
-			setLoading(false);
-		})();
+		handleInfoFetch(index, 0);
+		handleInfoFetch(compare, 1);
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);

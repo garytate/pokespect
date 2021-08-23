@@ -91,20 +91,15 @@ const Pokecard: React.FC<Props> = ({ url }) => {
 	};
 
 	useEffect(() => {
-		(async () => {
-			try {
-				const card = await fetchPokemonCard(url);
+		fetchPokemonCard(url).
+		then((data) => {
+			setPokemon(data);
 
-				setPokemon(card);
+			const favList = localStorage.getItem("favourites");
+			const favJSON = favList ? JSON.parse(favList) : {};
 
-				const favList = localStorage.getItem("favourites");
-				const favJSON = favList ? JSON.parse(favList) : {};
-
-				setIsFavourite(favJSON[card.name]);
-			} catch (err) {
-				console.error(err);
-			}
-		})();
+			setIsFavourite(favJSON[data.name]);
+		});
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
