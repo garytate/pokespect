@@ -15,7 +15,7 @@ import { IndexFormat } from "../utils/StringFormat";
 
 const useStyles = makeStyles({
 	card: {
-		backgroundColor: "#efeee9",
+		backgroundColor: "#f4f3ee",
 	},
 	tableKey: {
 		width: "20%",
@@ -29,7 +29,7 @@ const useStyles = makeStyles({
 		color: "#283E58",
 	},
 	table: {
-		backgroundColor: "#efeee9",
+		backgroundColor: "#f4f3ee",
 	},
 });
 

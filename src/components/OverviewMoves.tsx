@@ -28,11 +28,11 @@ const useStyles = makeStyles({
 		borderColor: "#778596",
 	},
 	table: {
-		backgroundColor: "#efeee9",
+		backgroundColor: "#f4f3ee",
 	},
 	card: {
 		height: "100%",
-		backgroundColor: "#efeee9",
+		backgroundColor: "#f4f3ee",
 	},
 	root: {
 		borderRadius: 8,
