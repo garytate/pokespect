@@ -10,9 +10,9 @@ const useStyles = makeStyles((theme: Theme) =>
 		card: {
 			alignItems: "center",
 			justifyContent: "center",
-			display: "grid"
+			display: "grid",
 		},
-	}),
+	})
 );
 
 export default function Favourites() {
@@ -25,33 +25,43 @@ export default function Favourites() {
 		const favList = localStorage.getItem("favourites");
 		const favJSON = favList ? JSON.parse(favList) : {};
 
-		let tempCards = []
+		let tempCards = [];
 
 		for (const pokemonName in favJSON) {
 			tempCards.push({
 				name: pokemonName,
-				url: `https://pokeapi.co/api/v2/pokemon/${pokemonName}`
-			})
+				url: `https://pokeapi.co/api/v2/pokemon/${pokemonName}`,
+			});
 		}
 
 		setCards(tempCards);
-		setFetching(false)
+		setFetching(false);
 	}, []);
 
 	return (
 		<Container>
-			<Grid container spacing={2} style={{marginTop: 2, flexGrow: 1}}>
-			{(fetching
-					? <p>Loading...</p>
-					: ((cards.length > 0) ? cards.map(card => {
-					return (
-						<Grid key={card.name} className={styles.card} item xs={12} md={6} lg={4}>
-							<Pokecard url={card.url}/>
-						</Grid>
-					)}) : <Typography variant="h6">No Favourites!</Typography>)
-			)}
-
+			<Grid container spacing={2} style={{ marginTop: 2, flexGrow: 1 }}>
+				{fetching ? (
+					<p>Loading...</p>
+				) : cards.length > 0 ? (
+					cards.map((card) => {
+						return (
+							<Grid
+								key={card.name}
+								className={styles.card}
+								item
+								xs={12}
+								md={6}
+								lg={4}
+							>
+								<Pokecard url={card.url} />
+							</Grid>
+						);
+					})
+				) : (
+					<Typography variant="h6">No Favourites!</Typography>
+				)}
 			</Grid>
 		</Container>
-	)
+	);
 }

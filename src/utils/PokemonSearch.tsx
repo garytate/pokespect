@@ -1,4 +1,4 @@
-import { POKEMON_LIST } from "../data"
+import { POKEMON_LIST } from "../data";
 
 export const FindPokemonByID = (id: number) => {
 	for (let i = 0; i < POKEMON_LIST.length; i++) {
@@ -6,7 +6,7 @@ export const FindPokemonByID = (id: number) => {
 			return POKEMON_LIST[i];
 		}
 	}
-}
+};
 
 export const FindPokemonByName = (name: string) => {
 	for (let i = 0; i < POKEMON_LIST.length; i++) {
@@ -14,4 +14,4 @@ export const FindPokemonByName = (name: string) => {
 			return POKEMON_LIST[i];
 		}
 	}
-}
+};
