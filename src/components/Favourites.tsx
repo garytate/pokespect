@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Pokecard from "./BrowserCard";
 
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import { Grid, Typography } from "@material-ui/core";
+import { Container, Grid, Typography } from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -39,8 +39,8 @@ export default function Favourites() {
 	}, []);
 
 	return (
-		<>
-			<Grid container spacing={2} style={{paddingTop: 15}}>
+		<Container>
+			<Grid container spacing={2} style={{marginTop: 2, flexGrow: 1}}>
 			{(fetching
 					? <p>Loading...</p>
 					: ((cards.length > 0) ? cards.map(card => {
@@ -52,6 +52,6 @@ export default function Favourites() {
 			)}
 
 			</Grid>
-		</>
+		</Container>
 	)
 }

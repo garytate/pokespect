@@ -1,4 +1,4 @@
-import { Button, Grid, Typography } from "@material-ui/core";
+import { Button, Container, CssBaseline, Grid, Typography } from "@material-ui/core";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
@@ -11,8 +11,6 @@ import TypeBadges from "./TypeBadges";
 import OverviewMoves from "./OverviewMoves";
 import { NameFormat } from "../utils/StringFormat";
 import { IPokemonInformation } from "../types/PokemonOverview";
-
-
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -63,7 +61,9 @@ export default function Overview(props: any) {
 	if (fetching || !overview) return (<p>loading...</p>)
 
 	return (
-		<Grid container spacing={3}>
+		<Container>
+
+		<Grid container>
 			<Grid item xs={12} md={4}>
 				<Link to="/"><Typography variant="h6" style={{paddingTop: 20, textDecoration: "none"}}>Return to Pokedex</Typography></Link>
 			</Grid>
@@ -95,5 +95,6 @@ export default function Overview(props: any) {
 			<OverviewMoves moves={overview.moves} />
 			</Grid>
 		</Grid>
+		</Container>
 	)
 }

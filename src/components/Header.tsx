@@ -4,6 +4,10 @@ import { Link } from "react-router-dom";
 import { CompareArrows, Favorite, GitHub } from "@material-ui/icons";
 
 const useStyles = makeStyles({
+	root: {
+		backgroundColor: "#283E58",
+		flexGrow: 0
+	},
 	icon: {
 		color: "white"
 	}
@@ -14,7 +18,7 @@ export default function Header() {
 	const styles = useStyles()
 
 	return (
-		<Grid container style={{backgroundColor: "#283E58"}} alignItems="center" justifyContent="center">
+		<Grid container className={styles.root} alignItems="center" justifyContent="center">
 			<Grid item xs={12} sm={4}>
 				<Link style={{textDecoration: "none", color: "#FAFAFF"}} to="/" >
 					<h1>pokespect</h1>

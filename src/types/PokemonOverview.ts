@@ -1,7 +1,8 @@
 
 export interface IPokemonTypes {
-	name: string,
-	url?: string
+	name: string;
+	url?: string;
+	[key: string]: any;
 }
 
 export interface IPokemonInformation {
@@ -9,7 +10,7 @@ export interface IPokemonInformation {
 	icon: string;
 	category: string;
 	index: number;
-	types: object;
+	types: IPokemonTypes;
 	abilities: object;
 	moves?: object;
 	stats: object;
