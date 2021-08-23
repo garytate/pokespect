@@ -44,7 +44,8 @@ export default function Browser() {
 
 	const handleLoadMore = async () => {
 		const offset = GenerationFirstPokemon[gen - 1];
-		const url = nextPage || `https://pokeapi.co/api/v2/pokemon?limit=18&offset=${offset}`;
+		const url =
+			nextPage || `https://pokeapi.co/api/v2/pokemon?limit=18&offset=${offset}`;
 
 		fetchPokemonPage(url).then((data) => {
 			setCards(cards.concat(data.results));
