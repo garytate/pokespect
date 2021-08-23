@@ -44,8 +44,7 @@ function OverviewMovesRow(props: any) {
 	const classes = useStyles();
 
 	useEffect(() => {
-		fetchMoveInformation(props.url)
-		.then((data) => {
+		fetchMoveInformation(props.url).then((data) => {
 			setMove(data);
 		});
 

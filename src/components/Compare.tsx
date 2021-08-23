@@ -59,15 +59,13 @@ const Compare: React.FC = () => {
 
 		setLoading(true);
 
-		fetchPokemonInformation(index).
-		then((data) => {
+		fetchPokemonInformation(index).then((data) => {
 			let updatedArray = comparedPokemon || [];
 			updatedArray[position] = data;
 			setComparedPokemon(updatedArray);
 
 			setLoading(false);
 		});
-
 	};
 
 	useEffect(() => {

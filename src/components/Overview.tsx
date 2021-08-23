@@ -28,10 +28,9 @@ export default function Overview(props: any) {
 	const styles = useStyles();
 
 	useEffect(() => {
-			fetchPokemonInformation(index).
-			then((data) => {
-				setOverview(data);
-			});
+		fetchPokemonInformation(index).then((data) => {
+			setOverview(data);
+		});
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);

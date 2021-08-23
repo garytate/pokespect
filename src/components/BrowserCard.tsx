@@ -91,8 +91,7 @@ const Pokecard: React.FC<Props> = ({ url }) => {
 	};
 
 	useEffect(() => {
-		fetchPokemonCard(url).
-		then((data) => {
+		fetchPokemonCard(url).then((data) => {
 			setPokemon(data);
 
 			const favList = localStorage.getItem("favourites");
