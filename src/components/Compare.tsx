@@ -2,9 +2,11 @@ import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody, makeS
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
-import { IPokemonOverview } from "../types/PokemonOverview";
+import GetPokemonInformation from "../api/PokemonAPI";
+import { IPokemonInformation } from "../types/PokemonOverview";
 import { NameFormat, IndexFormat } from "../utils/StringFormat";
 import CompareSearch from "./CompareSearch";
+import CompareTableRows from "./CompareTableRows";
 import TypeBadges from "./TypeBadges";
 
 const useStyles = makeStyles({
@@ -26,12 +28,14 @@ const useStyles = makeStyles({
 	}
   });
 
-const columns = ["sprite", "name", "index", "types", "height", "weight", "attack", "defense", "hp", "special-attack", "special-defense", "speed"]
+// const columns = ["sprite", "name", "index", "types", "height", "weight", "attack", "defense", "hp", "special-attack", "special-defense", "speed"]
+
+
 
 const DefaultPokemonData = {
-	name: "a",
-	icon: "a",
-	category: "a",
+	name: "-",
+	icon: "",
+	category: "-",
 	index: 1,
 	types: {},
 	abilities: {},
@@ -43,8 +47,8 @@ const Compare: React.FC = () => {
 	const classes = useStyles();
 	const history = useHistory();
 
-	const [leftPokemon, setLeftPokemon] = useState<IPokemonOverview>(DefaultPokemonData);
-	const [rightPokemon, setRightPokemon] = useState<IPokemonOverview>(DefaultPokemonData);
+	const [leftPokemon, setLeftPokemon] = useState<IPokemonInformation>(DefaultPokemonData);
+	const [rightPokemon, setRightPokemon] = useState<IPokemonInformation>(DefaultPokemonData);
 	const [loading, setLoading] = useState(0);
 
 	const onSearchUpdated = (newIndex: string, position: number) => {
@@ -57,39 +61,23 @@ const Compare: React.FC = () => {
 		handleInfoFetch(newIndex, position)
 	}
 
-	const handleInfoFetch = (index: string, position: number) => {
+	const handleInfoFetch = async (index: string, position: number) => {
 		if (index === "0") return;
 
-		axios.get(`https://pokeapi.co/api/v2/pokemon/${index}/`)
-		.then(res => {
-			let dataTable: IPokemonOverview = {
-				name: NameFormat(res.data.name),
-				index: res.data.id,
-				category: res.data.category,
-				abilities: res.data.abilities,
-				stats: res.data.stats,
-				height: res.data.height,
-				weight: res.data.weight,
-				icon: res.data.sprites.front_default,
-				types: (res.data.types.map((type: any) => type.type.name))
-			}
-			//	dataTable.types = res.data.types
+		try {
+			const pokemonInformation = await GetPokemonInformation(index);
 
-			for (const stat in res.data.stats) {
-				dataTable[res.data.stats[stat].stat.name] = res.data.stats[stat].base_stat
-			}
 			setLoading(loading + 1);
 
 			// TODO change this
 			if (position === 1) {
-				setLeftPokemon(dataTable)
+				setLeftPokemon(pokemonInformation)
 			} else {
-				setRightPokemon(dataTable)
+				setRightPokemon(pokemonInformation)
 			}
-		})
-		.catch(err => {
+		} catch (err) {
 			console.error(err)
-		})
+		}
 	}
 
 	useEffect(() => {
@@ -102,28 +90,18 @@ const Compare: React.FC = () => {
 	if (!leftPokemon || !rightPokemon) return <p>hi</p>;
 
 	return (
-	<Container maxWidth="sm">
+	<Container maxWidth="md">
 		<TableContainer>
 			<Table aria-label="simple table">
 				<TableHead>
 					<TableRow>
-						<TableCell className={classes.header} align="center"><CompareSearch onSearch={onSearchUpdated} position={1} current={leftPokemon}/></TableCell>
 						<TableCell></TableCell>
+						<TableCell className={classes.header} align="center"><CompareSearch onSearch={onSearchUpdated} position={1} current={leftPokemon}/></TableCell>
 						<TableCell className={classes.header} align="center"><CompareSearch onSearch={onSearchUpdated} position={2} current={rightPokemon}/></TableCell>
 					</TableRow>
 				</TableHead>
-				<TableBody >
-				{
-					columns.map(column => {
-						return (
-							<TableRow key={column}>
-								<TableCell className={classes.cell}>dev</TableCell>
-								<TableCell className={classes.cellKey}>dev</TableCell>
-								<TableCell className={classes.cell}>dev</TableCell>
-							</TableRow>
-						)
-					})
-				}
+				<TableBody>
+					<CompareTableRows left="1" right="2" />
 				</TableBody>
 			</Table>
 		</TableContainer>
@@ -142,3 +120,26 @@ export default Compare;
 // 		</TableRow>
 // 	)
 // })
+
+// <Table aria-label="simple table">
+// 				<TableHead>
+// 					<TableRow>
+// 						<TableCell className={classes.header} align="center"><CompareSearch onSearch={onSearchUpdated} position={1} current={leftPokemon}/></TableCell>
+// 						<TableCell></TableCell>
+// 						<TableCell className={classes.header} align="center"><CompareSearch onSearch={onSearchUpdated} position={2} current={rightPokemon}/></TableCell>
+// 					</TableRow>
+// 				</TableHead>
+// 				<TableBody >
+// 				{
+// 					columns.map(column => {
+// 						return (
+// 							<TableRow key={column}>
+// 								<TableCell className={classes.cell}>dev</TableCell>
+// 								<TableCell className={classes.cellKey}>dev</TableCell>
+// 								<TableCell className={classes.cell}>dev</TableCell>
+// 							</TableRow>
+// 						)
+// 					})
+// 				}
+// 				</TableBody>
+// 			</Table>

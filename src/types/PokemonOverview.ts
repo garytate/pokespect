@@ -4,7 +4,7 @@ export interface IPokemonTypes {
 	url?: string
 }
 
-export interface IPokemonOverview {
+export interface IPokemonInformation {
 	name: string;
 	icon: string;
 	category: string;
