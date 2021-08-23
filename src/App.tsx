@@ -41,16 +41,16 @@ const useStyles = makeStyles({
 	},
 	container: {
 		backgroundColor: "#fbfaf5",
-		flexGrow: 1
-	}
+		flexGrow: 1,
+	},
 });
 
 function App() {
 	const styles = useStyles();
 
 	useEffect(() => {
-		document.title = "pokespect"
- }, []);
+		document.title = "pokespect";
+	}, []);
 
 	return (
 		<ThemeProvider theme={theme}>

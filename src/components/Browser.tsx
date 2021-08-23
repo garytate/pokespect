@@ -23,12 +23,12 @@ const useStyles = makeStyles((theme: Theme) =>
 			alignItems: "center",
 			justifyContent: "center",
 			display: "grid",
-			padding: 10
+			padding: 10,
 		},
 		browser: {
-			marginTop: 2
-		}
-	}),
+			marginTop: 2,
+		},
+	})
 );
 
 export default function Browser() {
@@ -39,22 +39,24 @@ export default function Browser() {
 	const styles = useStyles();
 
 	const handleGen = (generation: number) => {
-		setGen(generation)
-	}
+		setGen(generation);
+	};
 
 	const handleLoadMore = async () => {
 		try {
 			const offset = GenerationFirstPokemon[gen - 1];
-			const url = nextPage || `https://pokeapi.co/api/v2/pokemon?limit=18&offset=${offset}`;
+			const url =
+				nextPage ||
+				`https://pokeapi.co/api/v2/pokemon?limit=18&offset=${offset}`;
 
 			const pageInfo = await fetchPokemonPage(url);
 
 			setCards(cards.concat(pageInfo.results));
 			setNextPage(pageInfo.next);
-		} catch ( err ) {
-			console.error(err)
+		} catch (err) {
+			console.error(err);
 		}
-	}
+	};
 
 	useEffect(() => {
 		handleLoadMore();
@@ -72,20 +74,25 @@ export default function Browser() {
 			</Grid>
 
 			<Grid container spacing={2}>
-				{cards.map(card => {
+				{cards.map((card) => {
 					return (
-						<Grid key={card.name} className={styles.card} item xs={12} md={6} lg={4}>
-							<Pokecard url={card.url}/>
+						<Grid
+							key={card.name}
+							className={styles.card}
+							item
+							xs={12}
+							md={6}
+							lg={4}
+						>
+							<Pokecard url={card.url} />
 						</Grid>
-					)
-			})}
-
+					);
+				})}
 			</Grid>
 
-
 			<IconButton onClick={handleLoadMore} aria-label="load-more">
-				<ExpandMore fontSize="large" style={{color: "#283E58"}} />
+				<ExpandMore fontSize="large" style={{ color: "#283E58" }} />
 			</IconButton>
 		</Container>
-	)
+	);
 }

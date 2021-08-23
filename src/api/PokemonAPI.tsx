@@ -13,17 +13,17 @@ export const fetchPokemonInformation = async (index: string) => {
 		height: res.data.height,
 		weight: res.data.weight,
 		icon: res.data.sprites.front_default,
-		types: (res.data.types.map((type: any) => type.type.name)),
+		types: res.data.types.map((type: any) => type.type.name),
 		moves: res.data.moves,
-		artwork: res.data.sprites.other["official-artwork"].front_default
-	}
-
-	for (const stat in res.data.stats) {
-		dataTable[res.data.stats[stat].stat.name] = res.data.stats[stat].base_stat
+		artwork: res.data.sprites.other["official-artwork"].front_default,
 	};
 
+	for (const stat in res.data.stats) {
+		dataTable[res.data.stats[stat].stat.name] = res.data.stats[stat].base_stat;
+	}
+
 	return dataTable;
-}
+};
 
 export const fetchMoveInformation = async (url: string) => {
 	const res = await axios.get(url);
@@ -34,22 +34,22 @@ export const fetchMoveInformation = async (url: string) => {
 		type: res.data.type.name,
 		accuracy: res.data.accuracy || "-",
 		pp: res.data.pp,
-		power: res.data.power || "-"
-	}
+		power: res.data.power || "-",
+	};
 
 	return dataTable;
-}
+};
 
 export const fetchPokemonPage = async (url: string) => {
 	const res = await axios.get(url);
 
 	let dataTable: any = {
 		results: res.data.results,
-		next: res.data.next
-	}
+		next: res.data.next,
+	};
 
 	return dataTable;
-}
+};
 
 export const fetchPokemonCard = async (url: string) => {
 	const res = await axios.get(url);
@@ -60,8 +60,8 @@ export const fetchPokemonCard = async (url: string) => {
 		name: res.data.name,
 		sprite: res.data.sprites.other["official-artwork"].front_default,
 		index: res.data.id,
-		types: types
-	}
+		types: types,
+	};
 
-	return dataTable
-}
+	return dataTable;
+};

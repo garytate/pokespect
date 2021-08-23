@@ -1,4 +1,3 @@
-
 export interface IPokemonTypes {
 	name: string;
 	url?: string;

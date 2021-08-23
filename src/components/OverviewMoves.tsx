@@ -1,4 +1,16 @@
-import { makeStyles, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, CssBaseline, Typography, Card, CardContent } from "@material-ui/core";
+import {
+	makeStyles,
+	Table,
+	TableBody,
+	TableCell,
+	TableContainer,
+	TableHead,
+	TableRow,
+	CssBaseline,
+	Typography,
+	Card,
+	CardContent,
+} from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { fetchMoveInformation } from "../api/PokemonAPI";
 import { IPokemonMove } from "../types/PokemonOverview";
@@ -10,21 +22,21 @@ const useStyles = makeStyles({
 		width: "10%",
 		textAlign: "center",
 		color: "#283E58",
-		borderColor: "#778596"
+		borderColor: "#778596",
 	},
 	tableCell: {
-		borderColor: "#778596"
+		borderColor: "#778596",
 	},
 	table: {
-		backgroundColor: "#efeee9"
+		backgroundColor: "#efeee9",
 	},
 	card: {
 		height: "100%",
 		backgroundColor: "#efeee9",
 	},
 	root: {
-		borderRadius: 8
-	}
+		borderRadius: 8,
+	},
 });
 
 function OverviewMovesRow(props: any) {
@@ -36,38 +48,44 @@ function OverviewMovesRow(props: any) {
 			try {
 				const moveInfo = await fetchMoveInformation(props.url);
 
-				setMove(moveInfo)
+				setMove(moveInfo);
 			} catch (err) {
-				console.error(err)
+				console.error(err);
 			}
 		})();
 
-			// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	if (!move) return <p>Loading</p>
+	if (!move) return <p>Loading</p>;
 
 	return (
-				<TableRow key={move.name}>
-					<TableCell className={classes.tableKey}><TypeBadges key={move.type} label={move.type} /> </TableCell>
-					<TableCell className={classes.tableKey}>{NameFormat(move.name)}</TableCell>
-					<TableCell className={classes.tableKey}>{move.accuracy}</TableCell>
-					<TableCell className={classes.tableKey}>{move.power}</TableCell>
-					<TableCell className={classes.tableKey}>{move.pp}</TableCell>
-				</TableRow>
-	)
+		<TableRow key={move.name}>
+			<TableCell className={classes.tableKey}>
+				<TypeBadges key={move.type} label={move.type} />{" "}
+			</TableCell>
+			<TableCell className={classes.tableKey}>
+				{NameFormat(move.name)}
+			</TableCell>
+			<TableCell className={classes.tableKey}>{move.accuracy}</TableCell>
+			<TableCell className={classes.tableKey}>{move.power}</TableCell>
+			<TableCell className={classes.tableKey}>{move.pp}</TableCell>
+		</TableRow>
+	);
 }
 
 export default function OverviewMoves(props: any) {
-	const [moveRows, setMoveRows] = useState<any[]>([])
+	const [moveRows, setMoveRows] = useState<any[]>([]);
 	const [loading, setLoading] = useState(true);
 	const classes = useStyles();
 
 	useEffect(() => {
-		let tempRows: any[] = []
+		let tempRows: any[] = [];
 
 		for (const move of props.moves) {
-			tempRows.push(<OverviewMovesRow key={move.move.name} url={move.move.url} />)
+			tempRows.push(
+				<OverviewMovesRow key={move.move.name} url={move.move.url} />
+			);
 		}
 
 		setMoveRows(tempRows);
@@ -76,14 +94,20 @@ export default function OverviewMoves(props: any) {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	if (loading) return (<></>)
+	if (loading) return <></>;
 
 	return (
 		<Card className={classes.card}>
 			<CssBaseline />
 
 			<CardContent>
-				<Typography style={{color: "#283E58", paddingBottom: 10}} variant="h4" align='left'>Attack Moves</Typography>
+				<Typography
+					style={{ color: "#283E58", paddingBottom: 10 }}
+					variant="h4"
+					align="left"
+				>
+					Attack Moves
+				</Typography>
 
 				<TableContainer className={classes.root}>
 					<Table>
@@ -96,12 +120,10 @@ export default function OverviewMoves(props: any) {
 								<TableCell align="center">PP</TableCell>
 							</TableRow>
 						</TableHead>
-						<TableBody className={classes.table}>
-							{moveRows}
-						</TableBody>
+						<TableBody className={classes.table}>{moveRows}</TableBody>
 					</Table>
 				</TableContainer>
 			</CardContent>
 		</Card>
-	)
+	);
 }

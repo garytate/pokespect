@@ -1,7 +1,6 @@
-
 export interface IPokemonCard {
-	name: string,
-	sprite: string,
-	index: number,
-	types: string[]
+	name: string;
+	sprite: string;
+	index: number;
+	types: string[];
 }
