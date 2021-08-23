@@ -10,7 +10,7 @@ import { fetchPokemonPage } from "../api/PokemonAPI";
 
 // We know for certain the first index of each
 // generation, making a simple look-up table
-const GenerationFirstPokemon = [0, 151, 251, 386, 493, 649, 721, 809];
+const GenerationFirstPokemon = [0, 151, 251, 386, 494, 649, 721, 809];
 
 interface PokecardData {
 	name: "loading...";
@@ -44,8 +44,7 @@ export default function Browser() {
 
 	const handleLoadMore = async () => {
 		const offset = GenerationFirstPokemon[gen - 1];
-		const url =
-			nextPage || `https://pokeapi.co/api/v2/pokemon?limit=18&offset=${offset}`;
+		const url = nextPage || `https://pokeapi.co/api/v2/pokemon?limit=18&offset=${offset}`;
 
 		fetchPokemonPage(url).then((data) => {
 			setCards(cards.concat(data.results));
@@ -54,7 +53,13 @@ export default function Browser() {
 	};
 
 	useEffect(() => {
-		handleLoadMore();
+		const offset = GenerationFirstPokemon[gen - 1];
+		const url = `https://pokeapi.co/api/v2/pokemon?limit=18&offset=${offset}`;
+
+		fetchPokemonPage(url).then((data) => {
+			setCards(data.results);
+			setNextPage(data.next);
+		});
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [gen]);

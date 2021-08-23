@@ -51,7 +51,7 @@ function OverviewMovesRow(props: any) {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	if (!move) return <>Loading</>;
+	if (!move) return <TableRow />;
 
 	return (
 		<TableRow key={move.name}>
