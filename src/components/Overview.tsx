@@ -10,7 +10,7 @@ import Trivia from "./OverviewTrivia";
 import TypeBadges from "./TypeBadges";
 import OverviewMoves from "./OverviewMoves";
 import { NameFormat } from "../utils/StringFormat";
-import { IPokemonOverview } from "../types/PokemonOverview";
+import { IPokemonInformation } from "../types/PokemonOverview";
 
 
 
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function Overview(props: any) {
 	const { index } = useParams<{index: string}>();
-	const [overview, setOverview] = useState<IPokemonOverview>();
+	const [overview, setOverview] = useState<IPokemonInformation>();
 	const [fetching, setFetching] = useState(true);
 	const [types, setTypes] = useState<string[]>([]);
 
