@@ -38,8 +38,8 @@ I spent a while confused at the PokeAPI documentation, trying to figure out wher
 ### Design
 When I first began the project, I was unsure as to how to design the website - due to the time constraints, I began building the application immediately with little to no styling, beginning to construct small design ideas once the main structure was finished.  I also referenced ideas from several other websites, including the official Pokedex.
 
-### Design
-When I first began the project, I was unsure as to how to design the website - due to the time constraints, I began building the application immediately with little to no styling, beginning to construct small design ideas once the main structure was finished.  I also referenced ideas from several other websites, including the official Pokedex.
+### Time Frame
+Given the scope of the project which I had in mind, it was difficult to crunch the design, planning and development of the project within the initial three days - after the three days concluded, I had an acceptable project - however I plan to continue supporting and updated the web application, learning more about the technologies as I use them.
 
 ## ✨ Extra Features
 ### Search Bar
