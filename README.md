@@ -6,6 +6,7 @@ A demo can be found on my website, [here.](https://garytate.co.uk/pokespect/#/)
 Built from scratch with [React](https://reactjs.org/), [TypeScript](https://www.typescriptlang.org/), [Material-UI](https://material-ui.com/) and more.
 
 ## 💻 Getting Started
+This is a development branch for moving to GraphQL, and will most likely not work on your system.  To run a local development server of pokespect, you will need to setup a Docker container of the GraphQL pokeapi server, which can be found in the instructions of [pokeapi](https://github.com/PokeAPI/pokeapi)
 ### Prerequisites
 
 To run pokespect, you will need Node.JS installed.
