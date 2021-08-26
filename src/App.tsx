@@ -15,6 +15,7 @@ import Header from "./components/Header";
 import Compare from "./components/Compare";
 import Favourites from "./components/Favourites";
 
+
 const theme = createTheme({
 	palette: {
 		primary: {
