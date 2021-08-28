@@ -12,30 +12,15 @@ import {
 } from "@apollo/client";
 
 const client = new ApolloClient({
-  uri: process.env.GRAPHQL_URI,
+  uri: `http://localhost:8080/v1/graphql`,
   cache: new InMemoryCache()
 });
 
-// const client = ...
-
-client
-  .query({
-    query: gql`
-      query samplePokeAPIquery {
-				pokemon_v2_pokemonspecies {
-					name
-					id
-				}
-			}
-    `
-  })
-  .then(result => console.log(result));
-
-
-
 ReactDOM.render(
 	<React.StrictMode>
-		<App />
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
 	</React.StrictMode>,
 	document.getElementById("root")
 );

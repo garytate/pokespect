@@ -7,6 +7,15 @@ import {
 	makeStyles,
 	ThemeProvider,
 } from "@material-ui/core";
+
+import {
+	ApolloClient,
+	InMemoryCache,
+	ApolloProvider,
+	useQuery,
+	gql
+} from "@apollo/client";
+
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
 
 import Browser from "./components/Browser";
@@ -14,6 +23,8 @@ import Pokedata from "./components/Overview";
 import Header from "./components/Header";
 import Compare from "./components/Compare";
 import Favourites from "./components/Favourites";
+import { GET_POKEMON_INFORMATION } from "./graphql/queries";
+
 
 
 const theme = createTheme({
@@ -46,8 +57,26 @@ const useStyles = makeStyles({
 	},
 });
 
+interface PokemonInformation {
+	id: number;
+	name: string
+  }
+
+
 function App() {
 	const styles = useStyles();
+
+	const { loading, data } = useQuery<PokemonInformation>(
+		GET_POKEMON_INFORMATION,
+		{
+		  variables: {index: 5}
+		}
+	)
+
+	if (loading || !data) return <></>;
+
+	console.log(data)
+	console.log(loading)
 
 	return (
 		<ThemeProvider theme={theme}>
