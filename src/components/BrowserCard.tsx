@@ -18,6 +18,8 @@ import { FavoriteBorder, Favorite } from "@material-ui/icons";
 import { IndexFormat, NameFormat } from "../utils/StringFormat";
 import { IPokemonCard } from "../types/PokecardCard";
 import { fetchPokemonCard } from "../api/PokemonAPI";
+import { GET_POKECARD_INFORMATION } from "../graphql/queries";
+import { useQuery } from "@apollo/client";
 
 const cardStyles = makeStyles((theme: Theme) => ({
 	container: {
@@ -66,13 +68,30 @@ const cardStyles = makeStyles((theme: Theme) => ({
 }));
 
 export interface BrowserCardProps {
-	url: string;
+	index: number;
 }
 
-const Pokecard: React.FC<BrowserCardProps> = ({ url }) => {
+interface PokemonInformation {
+	id: number;
+	name: string,
+	sprite: string,
+	types: any[]
+  }
+
+const Pokecard: React.FC<BrowserCardProps> = ({ index }) => {
 	const styles = cardStyles();
-	const [pokemon, setPokemon] = useState<IPokemonCard>();
 	const [isFavourite, setIsFavourite] = useState(false);
+
+	const {
+		loading,
+		data: { pokemon_v2_pokemonspecies: pokemon} = {}
+	} = useQuery<any>(
+		GET_POKECARD_INFORMATION,
+		{
+		  variables: {index: index}
+		}
+	)
+	console.log(loading)
 
 	const favouritePokemon = () => {
 		if (!pokemon) return;
@@ -90,29 +109,31 @@ const Pokecard: React.FC<BrowserCardProps> = ({ url }) => {
 		setIsFavourite(!isFavourite);
 	};
 
-	useEffect(() => {
-		fetchPokemonCard(url).then((data) => {
-			setPokemon(data);
+	// useEffect(() => {
+	// 	fetchPokemonCard(url).then((data) => {
+	// 		setPokemon(data);
 
-			const favList = localStorage.getItem("favourites");
-			const favJSON = favList ? JSON.parse(favList) : {};
+	// 		const favList = localStorage.getItem("favourites");
+	// 		const favJSON = favList ? JSON.parse(favList) : {};
 
-			setIsFavourite(favJSON[data.name]);
-		});
+	// 		setIsFavourite(favJSON[data.name]);
+	// 	});
 
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
+	// }, []);
 
-	if (!pokemon) return <CircularProgress />;
+	if (loading || !pokemon) return <CircularProgress />;
+
+	console.log(pokemon[0].name)
 
 	return (
 		<Card className={styles.container} variant="outlined">
-			<Link className={styles.link} to={`/pokemon/${pokemon.index}`}>
+			<Link className={styles.link} to={`/pokemon/1`}>
 				<CardMedia
 					component="img"
 					className={styles.sprite}
-					image={pokemon.sprite}
-					title={pokemon.name}
+					image="sprite"
+					title="name"
 				/>
 			</Link>
 			<div>
@@ -124,7 +145,7 @@ const Pokecard: React.FC<BrowserCardProps> = ({ url }) => {
 								style={{ color: "#BBC1CD" }}
 								variant="h6"
 							>
-								#{IndexFormat(pokemon.index)}
+								{pokemon[0].name}
 							</Typography>
 						</Grid>
 						<Grid item xs={2}>
@@ -143,22 +164,14 @@ const Pokecard: React.FC<BrowserCardProps> = ({ url }) => {
 					</Grid>
 					<Link
 						style={{ textDecoration: "none" }}
-						to={`/pokemon/${pokemon.index}`}
+						to={`/pokemon/${1}`}
 					>
 						<Typography className={styles.text} variant="h4" align="right">
-							{NameFormat(pokemon.name)}
+							name
 						</Typography>
 					</Link>
 					<div className={styles.types}>
-						{pokemon.types.map((type) => {
-							return (
-								<TypeBadges
-									key={type}
-									label={type.toUpperCase()}
-									style={{ margin: 0 }}
-								/>
-							);
-						})}
+
 					</div>
 				</CardContent>
 			</div>
@@ -167,3 +180,14 @@ const Pokecard: React.FC<BrowserCardProps> = ({ url }) => {
 };
 
 export default Pokecard;
+
+
+// {/*pokemon.types.map((type) => {
+// 							return (
+// 								<TypeBadges
+// 									key={type}
+// 									label={type.toUpperCase()}
+// 									style={{ margin: 0 }}
+// 								/>
+// 							);
+// 						})*/}

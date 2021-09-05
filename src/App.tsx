@@ -23,7 +23,7 @@ import Pokedata from "./components/Overview";
 import Header from "./components/Header";
 import Compare from "./components/Compare";
 import Favourites from "./components/Favourites";
-import { GET_POKEMON_INFORMATION } from "./graphql/queries";
+import { GET_POKECARD_INFORMATION } from "./graphql/queries";
 
 
 
@@ -57,26 +57,9 @@ const useStyles = makeStyles({
 	},
 });
 
-interface PokemonInformation {
-	id: number;
-	name: string
-  }
-
 
 function App() {
 	const styles = useStyles();
-
-	const { loading, data } = useQuery<PokemonInformation>(
-		GET_POKEMON_INFORMATION,
-		{
-		  variables: {index: 5}
-		}
-	)
-
-	if (loading || !data) return <></>;
-
-	console.log(data)
-	console.log(loading)
 
 	return (
 		<ThemeProvider theme={theme}>

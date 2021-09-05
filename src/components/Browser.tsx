@@ -85,7 +85,7 @@ const Browser: React.FC = () => {
 							md={6}
 							lg={4}
 						>
-							<Pokecard url={card.url} />
+							<Pokecard index={1} />
 						</Grid>
 					);
 				})}

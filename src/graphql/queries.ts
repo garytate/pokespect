@@ -6,7 +6,7 @@ import {
 	gql
 } from "@apollo/client";
 
-export const GET_POKEMON_INFORMATION = gql`
+export const GET_POKECARD_INFORMATION = gql`
 	query GetPokemonInformation($index: Int!) {
 		pokemon_v2_pokemonspecies(where: {id: {_eq: $index}}) {
 			id
