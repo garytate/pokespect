@@ -83,7 +83,6 @@ const CompareTableRows: React.FC<ICompareTableRows> = ({ comparedPokemon }) => {
 						{
 							// Display each pokemon's value
 							comparedPokemon.map((pokemon: IPokemonInformation) => {
-								console.log("during this?");
 								return (
 									<TableCell key={pokemon.name} className={classes.cell}>
 										{getRowJSX(column, pokemon)}

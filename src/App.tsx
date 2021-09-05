@@ -7,6 +7,15 @@ import {
 	makeStyles,
 	ThemeProvider,
 } from "@material-ui/core";
+
+import {
+	ApolloClient,
+	InMemoryCache,
+	ApolloProvider,
+	useQuery,
+	gql
+} from "@apollo/client";
+
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
 
 import Browser from "./components/Browser";
@@ -14,6 +23,9 @@ import Pokedata from "./components/Overview";
 import Header from "./components/Header";
 import Compare from "./components/Compare";
 import Favourites from "./components/Favourites";
+import { GET_POKECARD_INFORMATION } from "./graphql/queries";
+
+
 
 const theme = createTheme({
 	palette: {
@@ -44,6 +56,7 @@ const useStyles = makeStyles({
 		flexGrow: 1,
 	},
 });
+
 
 function App() {
 	const styles = useStyles();
