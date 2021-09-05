@@ -91,8 +91,7 @@ const Pokecard: React.FC<BrowserCardProps> = ({ index }) => {
 		  variables: {index: index}
 		}
 	)
-	console.log(loading)
-
+	
 	const favouritePokemon = () => {
 		if (!pokemon) return;
 
@@ -123,8 +122,6 @@ const Pokecard: React.FC<BrowserCardProps> = ({ index }) => {
 	// }, []);
 
 	if (loading || !pokemon) return <CircularProgress />;
-
-	console.log(pokemon[0].name)
 
 	return (
 		<Card className={styles.container} variant="outlined">
